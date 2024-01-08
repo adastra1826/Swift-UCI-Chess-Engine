@@ -8,7 +8,13 @@
 
 /* Begin PBXBuildFile section */
 		0C091B072B4981C7005E3F3B /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C091B062B4981C7005E3F3B /* main.swift */; };
-		0C091B102B4981E8005E3F3B /* IOHandler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0C091B0E2B4981E8005E3F3B /* IOHandler.cpp */; };
+		0C091B102B4981E8005E3F3B /* IO.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0C091B0E2B4981E8005E3F3B /* IO.cpp */; };
+		0C091B322B4BC006005E3F3B /* IOHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C091B312B4BC006005E3F3B /* IOHandler.swift */; };
+		0C091B342B4BCC51005E3F3B /* InputParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C091B332B4BCC51005E3F3B /* InputParser.swift */; };
+		0C091B362B4BCCA7005E3F3B /* Engine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C091B352B4BCCA7005E3F3B /* Engine.swift */; };
+		0C091B3B2B4BD2BE005E3F3B /* Protocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C091B3A2B4BD2BE005E3F3B /* Protocol.swift */; };
+		0C091B3D2B4BD2DE005E3F3B /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C091B3C2B4BD2DE005E3F3B /* Settings.swift */; };
+		0C091B3F2B4BDDE1005E3F3B /* CommandProcessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C091B3E2B4BDDE1005E3F3B /* CommandProcessor.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -26,9 +32,16 @@
 /* Begin PBXFileReference section */
 		0C091B032B4981C7005E3F3B /* Chess-Engine-UCI */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "Chess-Engine-UCI"; sourceTree = BUILT_PRODUCTS_DIR; };
 		0C091B062B4981C7005E3F3B /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
-		0C091B0D2B4981E8005E3F3B /* Chess-Engine-UCI-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Chess-Engine-UCI-Bridging-Header.h"; sourceTree = "<group>"; };
-		0C091B0E2B4981E8005E3F3B /* IOHandler.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = IOHandler.cpp; sourceTree = "<group>"; };
-		0C091B0F2B4981E8005E3F3B /* IOHandler.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = IOHandler.hpp; sourceTree = "<group>"; };
+		0C091B0D2B4981E8005E3F3B /* BridgingHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BridgingHeader.h; sourceTree = "<group>"; };
+		0C091B0E2B4981E8005E3F3B /* IO.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = IO.cpp; sourceTree = "<group>"; };
+		0C091B0F2B4981E8005E3F3B /* IO_Header.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = IO_Header.hpp; sourceTree = "<group>"; };
+		0C091B302B4BBC95005E3F3B /* UCI_Protocol.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = UCI_Protocol.txt; sourceTree = "<group>"; };
+		0C091B312B4BC006005E3F3B /* IOHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IOHandler.swift; sourceTree = "<group>"; };
+		0C091B332B4BCC51005E3F3B /* InputParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputParser.swift; sourceTree = "<group>"; };
+		0C091B352B4BCCA7005E3F3B /* Engine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Engine.swift; sourceTree = "<group>"; };
+		0C091B3A2B4BD2BE005E3F3B /* Protocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Protocol.swift; sourceTree = "<group>"; };
+		0C091B3C2B4BD2DE005E3F3B /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
+		0C091B3E2B4BDDE1005E3F3B /* CommandProcessor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommandProcessor.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -45,10 +58,10 @@
 		0C091AFA2B4981C7005E3F3B = {
 			isa = PBXGroup;
 			children = (
-				0C091B0F2B4981E8005E3F3B /* IOHandler.hpp */,
-				0C091B0E2B4981E8005E3F3B /* IOHandler.cpp */,
-				0C091B0D2B4981E8005E3F3B /* Chess-Engine-UCI-Bridging-Header.h */,
-				0C091B052B4981C7005E3F3B /* Chess-Engine-UCI */,
+				0C091B302B4BBC95005E3F3B /* UCI_Protocol.txt */,
+				0C091B0D2B4981E8005E3F3B /* BridgingHeader.h */,
+				0C091B2F2B4BB89A005E3F3B /* C++ */,
+				0C091B052B4981C7005E3F3B /* Swift */,
 				0C091B042B4981C7005E3F3B /* Products */,
 			);
 			sourceTree = "<group>";
@@ -61,12 +74,51 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		0C091B052B4981C7005E3F3B /* Chess-Engine-UCI */ = {
+		0C091B052B4981C7005E3F3B /* Swift */ = {
 			isa = PBXGroup;
 			children = (
 				0C091B062B4981C7005E3F3B /* main.swift */,
+				0C091B382B4BCCBE005E3F3B /* IO Handing */,
+				0C091B372B4BCCAE005E3F3B /* Engine */,
+				0C091B392B4BCCCD005E3F3B /* Chess */,
 			);
-			path = "Chess-Engine-UCI";
+			path = Swift;
+			sourceTree = "<group>";
+		};
+		0C091B2F2B4BB89A005E3F3B /* C++ */ = {
+			isa = PBXGroup;
+			children = (
+				0C091B0F2B4981E8005E3F3B /* IO_Header.hpp */,
+				0C091B0E2B4981E8005E3F3B /* IO.cpp */,
+			);
+			path = "C++";
+			sourceTree = "<group>";
+		};
+		0C091B372B4BCCAE005E3F3B /* Engine */ = {
+			isa = PBXGroup;
+			children = (
+				0C091B352B4BCCA7005E3F3B /* Engine.swift */,
+				0C091B3A2B4BD2BE005E3F3B /* Protocol.swift */,
+				0C091B3E2B4BDDE1005E3F3B /* CommandProcessor.swift */,
+				0C091B3C2B4BD2DE005E3F3B /* Settings.swift */,
+			);
+			path = Engine;
+			sourceTree = "<group>";
+		};
+		0C091B382B4BCCBE005E3F3B /* IO Handing */ = {
+			isa = PBXGroup;
+			children = (
+				0C091B312B4BC006005E3F3B /* IOHandler.swift */,
+				0C091B332B4BCC51005E3F3B /* InputParser.swift */,
+			);
+			path = "IO Handing";
+			sourceTree = "<group>";
+		};
+		0C091B392B4BCCCD005E3F3B /* Chess */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Chess;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -128,8 +180,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0C091B102B4981E8005E3F3B /* IOHandler.cpp in Sources */,
+				0C091B3F2B4BDDE1005E3F3B /* CommandProcessor.swift in Sources */,
+				0C091B322B4BC006005E3F3B /* IOHandler.swift in Sources */,
+				0C091B342B4BCC51005E3F3B /* InputParser.swift in Sources */,
+				0C091B102B4981E8005E3F3B /* IO.cpp in Sources */,
 				0C091B072B4981C7005E3F3B /* main.swift in Sources */,
+				0C091B3D2B4BD2DE005E3F3B /* Settings.swift in Sources */,
+				0C091B362B4BCCA7005E3F3B /* Engine.swift in Sources */,
+				0C091B3B2B4BD2BE005E3F3B /* Protocol.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -260,7 +318,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = "Chess-Engine-UCI-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = BridgingHeader.h;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 			};
@@ -272,7 +330,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = "Chess-Engine-UCI-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = BridgingHeader.h;
 				SWIFT_VERSION = 5.0;
 			};
 			name = Release;

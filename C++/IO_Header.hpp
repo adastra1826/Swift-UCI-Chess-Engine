@@ -1,12 +1,12 @@
 //
-//  IOHandler.hpp
+//  IO_Header.hpp
 //  Chess-Engine-UCI
 //
 //  Created by Nicholas Doherty on 1/6/24.
 //
 
-#ifndef IOHandler_hpp
-#define IOHandler_hpp
+#ifndef IO_Header_hpp
+#define IO_Header_hpp
 
 #include <stdio.h>
 
@@ -22,4 +22,4 @@ void output_string(const char* output);
 }
 #endif
 
-#endif /* IOHandler_hpp */
+#endif /* IO_Header_hpp */
