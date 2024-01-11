@@ -7,22 +7,10 @@
 
 import Foundation
 
-// Temporary sync code
-let threadGroup = DispatchGroup()
-let shouldQuitCondition = NSCondition()
-var shouldQuit = false
-// temp code
-
+let global = GlobalData()
 let ioHandler = IOHandler()
 let engine = Engine()
 
-print("Entering threads")
+let masterSync = MasterSynchronizer(ioHandler, engine)
 
-threadGroup.enter()
-
-Thread { ioHandler.start() }.start()
-Thread { engine.start() }.start()
-
-threadGroup.wait()
-
-print("Exiting threads")
+masterSync.startAll()

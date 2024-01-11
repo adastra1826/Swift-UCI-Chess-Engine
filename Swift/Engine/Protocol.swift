@@ -5,12 +5,13 @@
 //  Created by Nicholas Doherty on 1/8/24.
 //
 
+/*
 import Foundation
 
 enum Input {
     
     case uci
-    case debug(DebugOptions)
+    case debug(DebugCommand)
     case isready
     case setoption_name(SetOptionCommand)
     case register
@@ -25,9 +26,11 @@ enum Input {
     
     init(_ rawValue: String) {
         
+        // Process input into lowercase and split by spaces
         let rawValue = rawValue.lowercased()
-        
         let components = rawValue.components(separatedBy: " ")
+        let terms = components.count
+        let multipleTerms = Bool(terms > 1)
         
         // Empty input
         guard let command = components.first else {
@@ -39,8 +42,8 @@ enum Input {
         case "uci":
             self = .uci
         case "debug":
-            if components.count == 2 {
-                let debugAction = DebugOptions(components[1])
+            if terms == 2 {
+                let debugAction = DebugCommand(components[1])
                 if debugAction != .unknown {
                     self = .debug(debugAction)
                 } else {
@@ -55,7 +58,7 @@ enum Input {
             let optionAction = SetOptionCommand(command)
             print(optionAction)
             // SetOptionCommand(name: Chess_Engine_UCI.OptionNames.unknown(nil), value: nil)
-            if components.count > 1 {
+            if multipleTerms {
                 let optionAction = SetOptionCommand(command)
                 self = .known
             } else {
@@ -66,14 +69,14 @@ enum Input {
         case "ucinewgame":
             self = .ucinewgame
         case "position":
-            if components.count > 1 {
+            if multipleTerms {
                 //do stuff
                 self = .unknown
             } else {
                 self = .unknown
             }
         case "go":
-            if components.count > 1 {
+            if multipleTerms {
                 //do stuff
                 self = .unknown
             } else {
@@ -106,7 +109,7 @@ enum ValidatedSettings {
     }
 }
 
-enum DebugOptions {
+enum DebugCommand {
     
     case on
     case off
@@ -125,15 +128,17 @@ enum DebugOptions {
     }
 }
 
+/*
 extension Input {
     init(_ setOptionCommand: SetOptionCommand) {
         self = .setoption_name(setOptionCommand)
     }
 }
+ */
 
-struct SetOptionCommand {
+struct SetOptionCommands {
     
-    let name: OptionNames
+    let name: SetOptionCommand
     let value: String?
     
     init(_ rawValue: String) {
@@ -157,7 +162,7 @@ struct SetOptionCommand {
             fullOptionName = String(components.joined(separator: " "))
         }
         
-        name = OptionNames(fullOptionName)
+        name = SetOptionCommand(fullOptionName)
         
         
         value = fullSettingName
@@ -166,27 +171,27 @@ struct SetOptionCommand {
     }
 }
 
-enum OptionNames {
+enum SetOptionCommand {
     
     // Default
-    case hash(ValidatedSettings?)
-    case nalimovPath(ValidatedSettings?)
-    case nalimovCache(ValidatedSettings?)
-    case ponder(ValidatedSettings?)
-    case ownbook(ValidatedSettings?)
-    case multiPV(ValidatedSettings?)
-    case uci_showCurrLine(ValidatedSettings?)
-    case uci_showRefutations(ValidatedSettings?)
-    case uci_limitStrength(ValidatedSettings?)
-    case uci_elo(ValidatedSettings?)
-    case uci_analyseMode(ValidatedSettings?)
-    case uci_opponent(ValidatedSettings?)
+    case hash
+    case nalimovPath
+    case nalimovCache
+    case ponder
+    case ownbook
+    case multiPV
+    case uci_showCurrLine
+    case uci_showRefutations
+    case uci_limitStrength
+    case uci_elo
+    case uci_analyseMode
+    case uci_opponent
     
     // Custom
-    case aggressiveness(ValidatedSettings?)
+    case aggressiveness
     
     // Default
-    case unknown(ValidatedSettings?)
+    case unknown
     
     init(_ rawValue: String, _ optionSetting: String? = nil) {
         
@@ -199,7 +204,7 @@ enum OptionNames {
             if let optionSetting = optionSetting {
                 isValidSetting = OptionSettings.Hash().isValidSetting(optionSetting)
             }
-            self = .hash(isValidSetting)
+            self = .hash
             
         case "nalimovPath":
             if let optionSetting = optionSetting {
@@ -281,6 +286,10 @@ enum OptionNames {
     }
 }
 
+enum SetOptionCommandParameter {
+    
+}
+
 struct OptionSettings {
 
     // Default options
@@ -328,7 +337,7 @@ struct OptionSettings {
         let defaultValue = true
         
         func isValidSetting(_ input: String) -> ValidatedSettings {
-            if let bool = Bool(input) {
+            if Bool(input) != nil {
                 return ValidatedSettings(true)
             }
             return ValidatedSettings(false)
@@ -340,7 +349,7 @@ struct OptionSettings {
         let defaultValue = false
         
         func isValidSetting(_ input: String) -> ValidatedSettings {
-            if let bool = Bool(input) {
+            if Bool(input) != nil {
                 return ValidatedSettings(true)
             }
             return ValidatedSettings(false)
@@ -366,7 +375,7 @@ struct OptionSettings {
         let defaultValue = false
         
         func isValidSetting(_ input: String) -> ValidatedSettings {
-            if let bool = Bool(input) {
+            if Bool(input) != nil {
                 return ValidatedSettings(true)
             }
             return ValidatedSettings(false)
@@ -378,7 +387,7 @@ struct OptionSettings {
         let defaultValue = false
         
         func isValidSetting(_ input: String) -> ValidatedSettings {
-            if let bool = Bool(input) {
+            if Bool(input) != nil {
                 return ValidatedSettings(true)
             }
             return ValidatedSettings(false)
@@ -390,7 +399,7 @@ struct OptionSettings {
         let defaultValue = false
         
         func isValidSetting(_ input: String) -> ValidatedSettings {
-            if let bool = Bool(input) {
+            if Bool(input) != nil {
                 return ValidatedSettings(true)
             }
             return ValidatedSettings(false)
@@ -416,7 +425,7 @@ struct OptionSettings {
         let defaultValue = false
         
         func isValidSetting(_ input: String) -> ValidatedSettings {
-            if let bool = Bool(input) {
+            if Bool(input) != nil {
                 return ValidatedSettings(true)
             }
             return ValidatedSettings(false)
@@ -438,7 +447,7 @@ struct OptionSettings {
         let defaultValue = false
         
         func isValidSetting(_ input: String) -> ValidatedSettings {
-            if let bool = Bool(input) {
+            if Bool(input) != nil {
                 return ValidatedSettings(true)
             }
             return ValidatedSettings(false)
@@ -542,3 +551,4 @@ enum GoOptions {
     
     
 }
+*/

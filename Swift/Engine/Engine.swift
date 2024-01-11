@@ -9,31 +9,39 @@ import Foundation
 
 class Engine {
     
+    private let quitCondition: NSCondition
+    
+    init() {
+        
+        quitCondition = global.masterQuitCondition
+    }
+    
     func start() {
         
-        // Temporary test code to simulate work
-        var count = 1
-        shouldQuitCondition.lock() // Acquire lock before checking shouldQuit
+        var count = 0
         
-        while !shouldQuit {
+        while !global.safeMirrorMasterQuit() {
             
-            print(count)
+            /*
+            if global.safeMirrorMasterQuit() {
+                print("Break from Engine")
+                break
+            }
+             */
+            
             count += 1
+            print(count)
             
-            shouldQuitCondition.unlock()
-            Thread.sleep(forTimeInterval: 1.0) // Simulate background work with a delay
-            shouldQuitCondition.lock()
+            Thread.sleep(forTimeInterval: 1.0)
             
-            if shouldQuit { break }
-            
-            // Periodically check shouldQuit while holding the lock
-            if count % 10 == 0 {
-                shouldQuitCondition.wait() // Release lock, wait if shouldQuit is false
+            if count % 5 == 0 {
+                quitCondition.lock()
+                quitCondition.wait()
+                quitCondition.unlock()
             }
         }
-        shouldQuitCondition.unlock() // Release lock on exit
-        print("Counting thread stopped.")
-        threadGroup.leave()
+        
+        print("Break from Engine")
     }
     
 }

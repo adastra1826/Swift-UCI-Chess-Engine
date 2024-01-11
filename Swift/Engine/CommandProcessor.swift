@@ -7,6 +7,7 @@
 
 import Foundation
 
+/*
 class CommandProcessor {
     
     func processCommand(_ command: Input) {
@@ -34,3 +35,4 @@ class CommandProcessor {
         // Do nothing
     }
 }
+*/
