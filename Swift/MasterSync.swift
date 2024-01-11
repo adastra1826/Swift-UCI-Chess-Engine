@@ -24,8 +24,8 @@ class MasterSynchronizer {
         
         masterThreadGroup = DispatchGroup()
         
-        quitCondition = global.masterQuitCondition
-        quitSwitch = global.masterQuitSwitch
+        quitCondition = sharedData.masterQuitCondition
+        quitSwitch = sharedData.masterQuitSwitch
     }
     
     public func startAll() {
@@ -38,20 +38,17 @@ class MasterSynchronizer {
             self?.startEngine()
         }
         
-        //masterThreadGroup.enter()
-        
         ioThread.start()
         engineThread.start()
         
-        //masterThreadGroup.wait()
-        
+        // Artificial wait
         while true {
             
             Thread.sleep(forTimeInterval: 0.5)
-            //print(".")
+            log.send(["."], .trace)
             
-            if global.safeMirrorMasterQuit() {
-                print("Break from MasterSynchronizer")
+            if sharedData.safeMirrorMasterQuit() {
+                log.send(["Break from MasterSynchronizer"], .info)
                 break
             }
         }

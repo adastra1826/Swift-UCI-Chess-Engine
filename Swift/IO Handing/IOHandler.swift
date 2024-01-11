@@ -48,39 +48,48 @@ class IOHandler {
         cInputWrapper = C__stdinInputWrapper(50)
         commandDelegator = CommandDelegator()
         
-        quitCondition = global.masterQuitCondition
-        quitSwitch = global.masterQuitSwitch
+        quitCondition = sharedData.masterQuitCondition
+        quitSwitch = sharedData.masterQuitSwitch
     }
     
     func start() {
+        
+        log.send(["Start IO Handler"], .info)
+        
         while true {
-            
             // Collect raw input from C++ std::in
             let rawInput = cInputWrapper.getString()
             
             // Sanitize input, ensure non-empty
             if let sanitizedInput = sanitizeInput(rawInput) {
-                let enumeratedInput2 = Input_enum(sanitizedInput)
-                commandDelegator.parseEnumeratedInput2(enumeratedInput2)
+                
+                let topLevelCommand = TopLevelEngineCommandValidation(sanitizedInput)
+                
+                if topLevelCommand != .unknown {
+                    
+                    commandDelegator.parseEnumeratedInput2(topLevelCommand)
+                    
+                } else {
+                    // Ignore command
+                }
             }
             
-            if global.safeMirrorMasterQuit() {
-                print("Break from IO Handler")
+            if sharedData.safeMirrorMasterQuit() {
+                log.send(["Break from IO Handler"], .info)
                 break
             }
-            
-            //let enumeratedInput = Input(rawInput)
-            //inputParser.parseEnumeratedInput(enumeratedInput)
-            //inputParser.parseRawInput(finalInput)
             
         }
     }
     
     // Lowercase and split input by spaces
     func sanitizeInput(_ rawInput: String) -> [String]? {
+        
+        log.send(["sanitizeInput", "rawInput: \(rawInput)"], .verbose)
+        
         let lowercased = rawInput.lowercased()
         let components = lowercased.components(separatedBy: " ")
-        guard let component = components.first else { return nil }
+        guard components.first != nil else { return nil }
         return components
     }
 }

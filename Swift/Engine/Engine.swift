@@ -12,15 +12,16 @@ class Engine {
     private let quitCondition: NSCondition
     
     init() {
-        
-        quitCondition = global.masterQuitCondition
+        quitCondition = sharedData.masterQuitCondition
     }
     
     func start() {
         
+        log.send(["Start engine"], .info)
+        
         var count = 0
         
-        while !global.safeMirrorMasterQuit() {
+        while !sharedData.safeMirrorMasterQuit() {
             
             /*
             if global.safeMirrorMasterQuit() {
@@ -41,7 +42,7 @@ class Engine {
             }
         }
         
-        print("Break from Engine")
+        log.send(["Stop engine"], .info)
     }
     
 }

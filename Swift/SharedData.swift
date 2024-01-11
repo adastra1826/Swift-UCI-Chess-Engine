@@ -7,14 +7,14 @@
 
 import Foundation
 
-class GlobalData {
+class SharedData {
    
     let masterQuitCondition: NSCondition = NSCondition()
     var masterQuitSwitch: Bool = false
     
     public func safeMirrorMasterQuit() -> Bool {
         masterQuitCondition.lock()
-        let quitSwitch = global.masterQuitSwitch
+        let quitSwitch = sharedData.masterQuitSwitch
         masterQuitCondition.unlock()
         return quitSwitch
     }
