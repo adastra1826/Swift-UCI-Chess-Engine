@@ -25,7 +25,7 @@ void get_input(char* buffer, int bufferSize) {
     buffer[bufferSize - 1] = '\0';
 }
 
-// Function to output a string to the standard output
+// Output string to std::out
 void output_string(const char* output) {
     std::cout << output << std::endl;
 }

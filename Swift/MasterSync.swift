@@ -45,10 +45,10 @@ class MasterSynchronizer {
         while true {
             
             Thread.sleep(forTimeInterval: 0.5)
-            log.send(["."], .trace)
+            log.send(.trace,  ".")
             
             if sharedData.safeMirrorMasterQuit() {
-                log.send(["Break from MasterSynchronizer"], .info)
+                log.send(.info, "Break from MasterSynchronizer")
                 break
             }
         }
@@ -82,6 +82,6 @@ class MasterSynchronizer {
     }
     
     func breakdown() {
-        print("Breaking things down...")
+        log.send(.info, "Breaking things down...")
     }
 }

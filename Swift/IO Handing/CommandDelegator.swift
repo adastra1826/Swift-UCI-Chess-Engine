@@ -60,6 +60,6 @@ class CommandDelegator {
             output.append("Unknown command")
         }
         
-        log.send(output, LogLevel.info)
+        log.send(.info, array: output)
     }
 }

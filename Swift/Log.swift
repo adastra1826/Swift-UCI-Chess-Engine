@@ -16,15 +16,23 @@ class Log {
         logSettings = LogSettings()
     }
     
-    func send(_ logs: [String], _ level: LogLevel) {
+    func send(_ level: LogLevel, _ log: String? = nil, array logs: [String]? = nil) {
         if logSettings.validateLogPush(level) {
-            log(logs)
+            if let log = log {
+                push(log)
+            } else if let logs = logs {
+                push(array: logs)
+            }
         }
     }
     
-    private func log(_ logs: [String]) {
-        for log in logs {
+    private func push(_ log: String? = nil, array logs: [String]? = nil) {
+        if let log = log {
             output_string(log)
+        } else if let logs = logs {
+            for log in logs {
+                output_string(log)
+            }
         }
     }
     
@@ -62,12 +70,11 @@ class LogSettings {
         debugDescending = true
         
         cacheData = CacheData()
-        
-        updateHighest()
+        cacheData.updateHighest(debugLevelSettings)
     }
     
     var debugLevelSettings: [(LogLevel, Bool)] = [
-        // The following cannot be changed
+        // The first 3 should not be changed
         (LogLevel.warning, true),
         (LogLevel.error, true),
         (LogLevel.critical, true),
@@ -81,14 +88,35 @@ class LogSettings {
     
     // Precalculated data
     struct CacheData {
+        
         var highestLogLevel = 0
+        
+        // Precalculate highest log level
+        // Must call any time log settings are changed
+        mutating func updateHighest(_ levels: [(LogLevel, Bool)]) {
+            highestLogLevel = levels.lastIndex(where: { $0.1 == true }) ?? 0
+        }
+        
+        var derivedDebugLevelSettings: [(LogLevel, Bool)] = [
+            /*
+            // The first 3 should not be changed
+            (LogLevel.warning, false),
+            (LogLevel.error, false),
+            (LogLevel.critical, false),
+            // Lowest level, overview of thread calls and terminations
+            (LogLevel.info, false),
+            // Function calls
+            (LogLevel.trace, false),
+            // Log everything the engine does
+            (LogLevel.verbose, false)
+             */
+        ]
+        
+        mutating func updateDerived(_ debug: Bool, _ debugAll: Bool, _ debugDescending: Bool, _ levels: [(LogLevel, Bool)]) {
+            derivedDebugLevelSettings = levels
+        }
     }
     
-    // Precalculate highest log level
-    // Must call any time log settings are changed
-    func updateHighest() {
-        cacheData.highestLogLevel = debugLevelSettings.lastIndex(where: { $0.1 == true }) ?? 0
-    }
     
     func validateLogPush(_ level: LogLevel) -> Bool {
         

@@ -10,7 +10,7 @@ import Foundation
 let settings = Settings()
 let log = Log()
 
-log.send(["Initializing"], .info)
+log.send(.info, "Initializing")
 
 let sharedData = SharedData()
 let ioHandler = IOHandler()
@@ -18,6 +18,6 @@ let engine = Engine()
 
 let masterSync = MasterSynchronizer(ioHandler, engine)
 
-log.send(["Starting main threads"], .info)
+log.send(.info, "Starting main threads")
 
 masterSync.startAll()

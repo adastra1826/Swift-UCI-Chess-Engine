@@ -17,7 +17,7 @@ class Engine {
     
     func start() {
         
-        log.send(["Start engine"], .info)
+        log.send(.info, "Start engine")
         
         var count = 0
         
@@ -42,7 +42,7 @@ class Engine {
             }
         }
         
-        log.send(["Stop engine"], .info)
+        log.send(.info, "Stop engine")
     }
     
 }

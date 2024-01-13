@@ -54,7 +54,7 @@ class IOHandler {
     
     func start() {
         
-        log.send(["Start IO Handler"], .info)
+        log.send(.info, "Start IO Handler")
         
         while true {
             // Collect raw input from C++ std::in
@@ -75,7 +75,7 @@ class IOHandler {
             }
             
             if sharedData.safeMirrorMasterQuit() {
-                log.send(["Break from IO Handler"], .info)
+                log.send(.info, "Break from IO Handler")
                 break
             }
             
@@ -85,7 +85,7 @@ class IOHandler {
     // Lowercase and split input by spaces
     func sanitizeInput(_ rawInput: String) -> [String]? {
         
-        log.send(["sanitizeInput", "rawInput: \(rawInput)"], .verbose)
+        log.send(.verbose, array: ["sanitizeInput", "rawInput: \(rawInput)"])
         
         let lowercased = rawInput.lowercased()
         let components = lowercased.components(separatedBy: " ")
