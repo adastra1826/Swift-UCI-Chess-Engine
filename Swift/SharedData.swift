@@ -9,19 +9,25 @@ import Foundation
 
 class SharedData {
    
-    let masterQuitCondition: NSCondition = NSCondition()
-    var masterQuitSwitch: Bool = false
+    let quitSwitchQueue: DispatchQueue
+    //let masterQuitCondition: NSCondition
+    var masterQuitSwitch: Bool
+    
+    init() {
+        quitSwitchQueue = DispatchQueue(label: "com.PeerlessApps.Chess.quitSwitchQueue")
+        //masterQuitCondition = NSCondition()
+        masterQuitSwitch = false
+    }
     
     public func safeMirrorMasterQuit() -> Bool {
-        masterQuitCondition.lock()
-        let quitSwitch = sharedData.masterQuitSwitch
-        masterQuitCondition.unlock()
-        return quitSwitch
+        quitSwitchQueue.sync {
+            return sharedData.masterQuitSwitch
+        }
     }
     
     public func safeKillAll() {
-        masterQuitCondition.lock()
-        masterQuitSwitch = true
-        masterQuitCondition.unlock()
+        quitSwitchQueue.sync {
+            masterQuitSwitch = true
+        }
     }
 }

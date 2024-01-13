@@ -9,22 +9,20 @@ import Foundation
 
 class MasterSynchronizer {
     
-    private let ioHandler: IOHandler
+    private let ioHandler: SwiftInputWrapper
     private let engine: Engine
     
     private let masterThreadGroup: DispatchGroup
     
-    private let quitCondition: NSCondition
     private var quitSwitch: Bool
     
-    init(_ ioHandler: IOHandler, _ engine: Engine) {
+    init(_ ioHandler: SwiftInputWrapper, _ engine: Engine) {
         
         self.ioHandler = ioHandler
         self.engine = engine
         
         masterThreadGroup = DispatchGroup()
         
-        quitCondition = sharedData.masterQuitCondition
         quitSwitch = sharedData.masterQuitSwitch
     }
     

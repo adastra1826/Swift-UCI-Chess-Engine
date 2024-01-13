@@ -13,7 +13,7 @@ let log = Log()
 log.send(.info, "Initializing")
 
 let sharedData = SharedData()
-let ioHandler = IOHandler()
+let ioHandler = SwiftInputWrapper()
 let engine = Engine()
 
 let masterSync = MasterSynchronizer(ioHandler, engine)

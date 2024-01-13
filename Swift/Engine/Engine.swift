@@ -9,13 +9,32 @@ import Foundation
 
 class Engine {
     
-    private let quitCondition: NSCondition
+    // Max number of concurrent searching threads
+    private let searchThreadPermits: DispatchSemaphore
+    
+    // Stop calculating ASAP
+    private let stopCondition: NSCondition
+    
+    lazy var commandDispatchMap: [TopLevelCommand: () -> Void] = [
+        .uci: uciCommand,
+        .isready: isReadyCommand,
+        .ucinewgame: uciNewGameCommand,
+        .stop: stopCommand,
+        .ponderhit: ponderHitCommand
+    ]
     
     init() {
-        quitCondition = sharedData.masterQuitCondition
+        
+        searchThreadPermits = DispatchSemaphore(value: settings.engine.getMaxThreads())
+        
+        stopCondition = NSCondition()
     }
     
     func start() {
+        fakeStart()
+    }
+    
+    func fakeStart() {
         
         log.send(.info, "Start engine")
         
@@ -36,13 +55,37 @@ class Engine {
             Thread.sleep(forTimeInterval: 1.0)
             
             if count % 5 == 0 {
-                quitCondition.lock()
-                quitCondition.wait()
-                quitCondition.unlock()
             }
         }
         
         log.send(.info, "Stop engine")
+    }
+    
+    func commandNoArgs(_ command: TopLevelCommand) {
+        log.send(.verbose, array: ["commandNoArgs(_ command: TopLevelCommand)", "command: \(command)"])
+        if let commandFunc = commandDispatchMap[command] {
+            commandFunc()
+        }
+    }
+    
+    func uciCommand() {
+        log.send(.verbose, "uciCommand()")
+    }
+    
+    func isReadyCommand() {
+        log.send(.verbose, "isReadyCommand()")
+    }
+    
+    func uciNewGameCommand() {
+        log.send(.verbose, "uciNewGameCommand()")
+    }
+    
+    func stopCommand() {
+        log.send(.verbose, "stopCommand()")
+    }
+    
+    func ponderHitCommand() {
+        log.send(.verbose, "ponderHitCommand()")
     }
     
 }

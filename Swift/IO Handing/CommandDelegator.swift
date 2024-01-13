@@ -7,59 +7,35 @@
 
 import Foundation
 
-// Receives sanitized input
+// Receives sanitized input, delegates commands to their respective classes
 class CommandDelegator {
     
-    public var continueLooping: Bool
-    
-    private let quitCondition: NSCondition
     private var quitSwitch: Bool
     
     init() {
-        
-        continueLooping = true
-        
-        quitCondition = sharedData.masterQuitCondition
         quitSwitch = sharedData.masterQuitSwitch
     }
     
-    func parseEnumeratedInput2(_ input: TopLevelEngineCommandValidation) {
+    func delegateCommand(_ command: TopLevelCommand) {
         
-        var output: [String] = []
+        log.send(.verbose, array: ["delegateCommand(_ command: TopLevelCommand)", "command: \(command)"])
         
-        switch input {
-        case .uci:
-            output.append("id name AstralProjection")
-            output.append("id author Nicholas Doherty")
-            output.append("uciok")
-        case .debug:
-            output.append("debug")
-        case .isready:
-            output.append("readyok")
-        case .setoption:
-            output.append("setoption")
-        case .register:
-            output.append("register")
-        case .ucinewgame:
-            output.append("ucinewgame")
-        case .position:
-            output.append("position")
-        case .go:
-            quitCondition.lock()
-            quitCondition.signal()
-            quitCondition.unlock()
-            output.append("go")
-        case .stop:
-            output.append("stop")
-        case .ponderhit:
-            output.append("ponderhit")
+        
+        switch command {
         case .quit:
             sharedData.safeKillAll()
-            output.append("quit")
+        case .uci, .isready, .ucinewgame, .stop, .ponderhit:
+            engine.commandNoArgs(command)
+        case .debug:
+            break
+        case .setoption:
+            break
+        case .register:
+            break
+        case .go:
+            break
         default:
-            output.append("Unknown command")
+            break
         }
-        
-        log.send(.info, array: output)
     }
 }
