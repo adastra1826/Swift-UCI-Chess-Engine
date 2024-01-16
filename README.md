@@ -1,9 +1,11 @@
 This is currently a work in progress. It is not currently useable in any way except for responding to basic UCI prompts:
 
-isready ->    readyok
-uci ->        id name Peerless Chess Engine
-              id author Nicholas Doherty
-              readyok
+
+    
+    isready ->    readyok
+    uci ->        id name Peerless Chess Engine
+                  id author Nicholas Doherty
+                  readyok
 
 Current package dependencies for logging: 
 XCGLogger: https://github.com/DaveWoodCom/XCGLogger
