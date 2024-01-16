@@ -9,41 +9,48 @@ import Foundation
 
 class MasterSynchronizer {
     
-    private let ioHandler: SwiftInputWrapper
+    private let inputWrapper: SwiftInputWrapper
+    private let outputWrapper: SwiftOutputWrapper
     private let engine: Engine
     
     private let masterThreadGroup: DispatchGroup
     
     private var quitSwitch: Bool
     
-    init(_ ioHandler: SwiftInputWrapper, _ engine: Engine) {
+    init() {
         
-        self.ioHandler = ioHandler
-        self.engine = engine
+        self.inputWrapper = SwiftInputWrapper()
+        self.outputWrapper = SwiftOutputWrapper()
+        self.engine = Engine(outputWrapper)
         
         masterThreadGroup = DispatchGroup()
         
-        quitSwitch = sharedData.masterQuitSwitch
+        quitSwitch = sharedData.safeMirrorMasterQuit()
     }
     
     public func startAll() {
         
-        let ioThread = Thread { [weak self] in
-            self?.startIO()
+        let inputThread = Thread { [weak self] in
+            self?.startInput()
+        }
+        
+        let outputThread = Thread { [weak self] in
+            self?.startOutput()
         }
         
         let engineThread = Thread { [weak self] in
             self?.startEngine()
         }
         
-        ioThread.start()
+        inputThread.start()
+        outputThread.start()
         engineThread.start()
         
         // Artificial wait
         while true {
             
             Thread.sleep(forTimeInterval: 0.5)
-            log.verbose(".")
+            //log.verbose(".")
             
             if sharedData.safeMirrorMasterQuit() {
                 log.info("Break from MasterSynchronizer")
@@ -60,20 +67,34 @@ class MasterSynchronizer {
         
     }
     
-    func startIO() {
-        self.ioHandler.start()
+    func startInput() {
+        inputWrapper.start()
     }
     
-    func stopIO() {
-        
+    func startOutput() {
+        outputWrapper.start()
     }
     
     func startEngine() {
-        self.engine.start()
+        engine.start()
     }
     
-    func commandEngine() {
+    func commandEngine(_ command: TopLevelCommand, _ arguments: [String]) {
         
+        log.info("\(command): \(arguments)")
+        
+        switch command {
+        case .quit:
+            sharedData.safeKillAll()
+        case .uci, .isready, .ucinewgame, .stop, .ponderhit:
+            engine.commandNoArgs(command)
+        case .debug, .setoption, .register, .go:
+            engine.commandWithArgs(command, arguments)
+        case .unknown:
+            log.info("Unknown command")
+        default:
+            log.warning("Unknown command. You should never see this log.")
+        }
     }
     
     private func stopEngine() {

@@ -25,6 +25,8 @@ enum TopLevelCommand {
     
     init(_ input: [String]) {
         
+        log.info("\(input)")
+        
         let components = input
         let command = components.first!
         

@@ -57,7 +57,7 @@ class SwiftInputWrapper {
             inputParser.parse(rawInput)
             
             if sharedData.safeMirrorMasterQuit() {
-                log.info("Break from SwiftInputWrapper")
+                log.info("End SwiftInputWrapper: master quit")
                 break
             }
         }

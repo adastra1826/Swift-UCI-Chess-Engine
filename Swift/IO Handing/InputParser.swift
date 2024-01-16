@@ -9,25 +9,23 @@ import Foundation
 
 class InputParser {
     
-    let commandDelegator: CommandDelegator
-    
     init() {
-        commandDelegator = CommandDelegator()
     }
     
     func parse(_ rawInput: String) {
+        
+        log.info("\(rawInput)")
+        
         // Sanitize input, ensure non-empty
         if let sanitizedInput = sanitizeInput(rawInput) {
             let topLevelCommand = TopLevelCommand(sanitizedInput)
-            commandDelegator.delegateCommand(topLevelCommand)
+            let arguments = Array(sanitizedInput.suffix(from: 1))
+            masterSync.commandEngine(topLevelCommand, arguments)
         }
     }
     
     // Lowercase and split input by spaces
     func sanitizeInput(_ rawInput: String) -> [String]? {
-        
-        //log.send(.verbose, array: ["sanitizeInput(_ rawInput: String) -> [String]?", "rawInput: \(rawInput)"])
-        
         let lowercased = rawInput.lowercased()
         let components = lowercased.components(separatedBy: " ")
         guard components.first != nil else { return nil }

@@ -9,13 +9,17 @@ import Foundation
 
 class SharedData {
    
-    let quitSwitchQueue: DispatchQueue
-    //let masterQuitCondition: NSCondition
-    var masterQuitSwitch: Bool
+    private let quitSwitchQueue: DispatchQueue
+    
+    private var masterQuitSwitch: Bool
+    
+    struct Info {
+        static let author = "Nicholas Doherty"
+        static let engine = "Peerless Chess Engine"
+    }
     
     init() {
         quitSwitchQueue = DispatchQueue(label: "com.PeerlessApps.Chess.quitSwitchQueue")
-        //masterQuitCondition = NSCondition()
         masterQuitSwitch = false
     }
     
