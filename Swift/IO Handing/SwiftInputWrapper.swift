@@ -48,7 +48,7 @@ class SwiftInputWrapper {
     
     func start() {
         
-        log.send(.info, "Start SwiftInputWrapper")
+        log.info("Start SwiftInputWrapper")
         
         while true {
             // Collect raw input from C++ std::in
@@ -57,7 +57,7 @@ class SwiftInputWrapper {
             inputParser.parse(rawInput)
             
             if sharedData.safeMirrorMasterQuit() {
-                log.send(.info, "Break from SwiftInputWrapper")
+                log.info("Break from SwiftInputWrapper")
                 break
             }
         }

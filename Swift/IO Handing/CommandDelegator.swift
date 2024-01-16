@@ -18,8 +18,6 @@ class CommandDelegator {
     
     func delegateCommand(_ command: TopLevelCommand) {
         
-        log.send(.verbose, array: ["delegateCommand(_ command: TopLevelCommand)", "command: \(command)"])
-        
         
         switch command {
         case .quit:

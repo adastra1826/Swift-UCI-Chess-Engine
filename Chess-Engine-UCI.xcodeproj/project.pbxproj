@@ -17,8 +17,9 @@
 		0C75B9772B4F788800C0B90E /* Protocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C75B9762B4F788800C0B90E /* Protocol.swift */; };
 		0C75B9792B4F849D00C0B90E /* MasterSync.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C75B9782B4F849D00C0B90E /* MasterSync.swift */; };
 		0C75B97B2B4FA78000C0B90E /* SharedData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C75B97A2B4FA78000C0B90E /* SharedData.swift */; };
-		0C75B97D2B4FF09700C0B90E /* Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C75B97C2B4FF09700C0B90E /* Log.swift */; };
 		0C7A57002B52691E00011987 /* InputParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C7A56FF2B52691E00011987 /* InputParser.swift */; };
+		0C7A57032B565A4B00011987 /* ObjcExceptionBridging in Frameworks */ = {isa = PBXBuildFile; productRef = 0C7A57022B565A4B00011987 /* ObjcExceptionBridging */; };
+		0C7A57052B565A4B00011987 /* XCGLogger in Frameworks */ = {isa = PBXBuildFile; productRef = 0C7A57042B565A4B00011987 /* XCGLogger */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -48,7 +49,6 @@
 		0C75B9762B4F788800C0B90E /* Protocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Protocol.swift; sourceTree = "<group>"; };
 		0C75B9782B4F849D00C0B90E /* MasterSync.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MasterSync.swift; sourceTree = "<group>"; };
 		0C75B97A2B4FA78000C0B90E /* SharedData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedData.swift; sourceTree = "<group>"; };
-		0C75B97C2B4FF09700C0B90E /* Log.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Log.swift; sourceTree = "<group>"; };
 		0C7A56FF2B52691E00011987 /* InputParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputParser.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -57,6 +57,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0C7A57032B565A4B00011987 /* ObjcExceptionBridging in Frameworks */,
+				0C7A57052B565A4B00011987 /* XCGLogger in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -89,7 +91,6 @@
 				0C091B3C2B4BD2DE005E3F3B /* Settings.swift */,
 				0C75B97A2B4FA78000C0B90E /* SharedData.swift */,
 				0C75B9782B4F849D00C0B90E /* MasterSync.swift */,
-				0C75B97C2B4FF09700C0B90E /* Log.swift */,
 				0C091B382B4BCCBE005E3F3B /* IO Handing */,
 				0C091B372B4BCCAE005E3F3B /* Engine */,
 				0C091B392B4BCCCD005E3F3B /* Chess */,
@@ -149,6 +150,10 @@
 			dependencies = (
 			);
 			name = "Chess-Engine-UCI";
+			packageProductDependencies = (
+				0C7A57022B565A4B00011987 /* ObjcExceptionBridging */,
+				0C7A57042B565A4B00011987 /* XCGLogger */,
+			);
 			productName = "Chess-Engine-UCI";
 			productReference = 0C091B032B4981C7005E3F3B /* Chess-Engine-UCI */;
 			productType = "com.apple.product-type.tool";
@@ -178,6 +183,9 @@
 				Base,
 			);
 			mainGroup = 0C091AFA2B4981C7005E3F3B;
+			packageReferences = (
+				0C7A57012B565A4B00011987 /* XCRemoteSwiftPackageReference "XCGLogger" */,
+			);
 			productRefGroup = 0C091B042B4981C7005E3F3B /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -194,7 +202,6 @@
 			files = (
 				0C091B3F2B4BDDE1005E3F3B /* CommandProcessor.swift in Sources */,
 				0C091B322B4BC006005E3F3B /* SwiftInputWrapper.swift in Sources */,
-				0C75B97D2B4FF09700C0B90E /* Log.swift in Sources */,
 				0C091B342B4BCC51005E3F3B /* CommandDelegator.swift in Sources */,
 				0C091B102B4981E8005E3F3B /* IO.cpp in Sources */,
 				0C7A57002B52691E00011987 /* InputParser.swift in Sources */,
@@ -373,6 +380,30 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		0C7A57012B565A4B00011987 /* XCRemoteSwiftPackageReference "XCGLogger" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/DaveWoodCom/XCGLogger";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 7.0.1;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		0C7A57022B565A4B00011987 /* ObjcExceptionBridging */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 0C7A57012B565A4B00011987 /* XCRemoteSwiftPackageReference "XCGLogger" */;
+			productName = ObjcExceptionBridging;
+		};
+		0C7A57042B565A4B00011987 /* XCGLogger */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 0C7A57012B565A4B00011987 /* XCRemoteSwiftPackageReference "XCGLogger" */;
+			productName = XCGLogger;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 0C091AFB2B4981C7005E3F3B /* Project object */;
 }

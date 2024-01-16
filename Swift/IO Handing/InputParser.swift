@@ -26,7 +26,7 @@ class InputParser {
     // Lowercase and split input by spaces
     func sanitizeInput(_ rawInput: String) -> [String]? {
         
-        log.send(.verbose, array: ["sanitizeInput(_ rawInput: String) -> [String]?", "rawInput: \(rawInput)"])
+        //log.send(.verbose, array: ["sanitizeInput(_ rawInput: String) -> [String]?", "rawInput: \(rawInput)"])
         
         let lowercased = rawInput.lowercased()
         let components = lowercased.components(separatedBy: " ")

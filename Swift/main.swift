@@ -6,11 +6,14 @@
 //
 
 import Foundation
+import XCGLogger
 
 let settings = Settings()
-let log = Log()
+let log = XCGLogger.default
 
-log.send(.info, "Initializing")
+log.setup(level: .debug, showThreadName: true, showLevel: true, showFileNames: true, showLineNumbers: true, writeToFile: "/Users/nicholasdoherty/Desktop/log.txt", fileLevel: .verbose)
+
+log.logAppDetails()
 
 let sharedData = SharedData()
 let ioHandler = SwiftInputWrapper()
@@ -18,6 +21,6 @@ let engine = Engine()
 
 let masterSync = MasterSynchronizer(ioHandler, engine)
 
-log.send(.info, "Starting main threads")
+log.info("Starting main threads")
 
 masterSync.startAll()
