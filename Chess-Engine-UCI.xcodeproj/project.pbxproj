@@ -19,6 +19,11 @@
 		0C7A57032B565A4B00011987 /* ObjcExceptionBridging in Frameworks */ = {isa = PBXBuildFile; productRef = 0C7A57022B565A4B00011987 /* ObjcExceptionBridging */; };
 		0C7A57052B565A4B00011987 /* XCGLogger in Frameworks */ = {isa = PBXBuildFile; productRef = 0C7A57042B565A4B00011987 /* XCGLogger */; };
 		0C7A57072B566A5D00011987 /* OutputWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C7A57062B566A5D00011987 /* OutputWrapper.swift */; };
+		0C7A57092B5A112800011987 /* Generic Functions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C7A57082B5A112800011987 /* Generic Functions.swift */; };
+		0C7A570C2B5A122300011987 /* InitialBoardConditions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C7A570B2B5A122300011987 /* InitialBoardConditions.swift */; };
+		0C7A570E2B5A128100011987 /* Magic Variables.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C7A570D2B5A128100011987 /* Magic Variables.swift */; };
+		0C7A57102B5A3EC300011987 /* Move Validation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C7A570F2B5A3EC300011987 /* Move Validation.swift */; };
+		0C7A57122B5A3F3F00011987 /* BitBoard Manipulation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C7A57112B5A3F3F00011987 /* BitBoard Manipulation.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -48,6 +53,11 @@
 		0C75B97A2B4FA78000C0B90E /* SharedData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedData.swift; sourceTree = "<group>"; };
 		0C7A56FF2B52691E00011987 /* InputParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputParser.swift; sourceTree = "<group>"; };
 		0C7A57062B566A5D00011987 /* OutputWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutputWrapper.swift; sourceTree = "<group>"; };
+		0C7A57082B5A112800011987 /* Generic Functions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Generic Functions.swift"; sourceTree = "<group>"; };
+		0C7A570B2B5A122300011987 /* InitialBoardConditions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialBoardConditions.swift; sourceTree = "<group>"; };
+		0C7A570D2B5A128100011987 /* Magic Variables.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Magic Variables.swift"; sourceTree = "<group>"; };
+		0C7A570F2B5A3EC300011987 /* Move Validation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Move Validation.swift"; sourceTree = "<group>"; };
+		0C7A57112B5A3F3F00011987 /* BitBoard Manipulation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BitBoard Manipulation.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -92,6 +102,7 @@
 				0C091B382B4BCCBE005E3F3B /* IO Handing */,
 				0C091B372B4BCCAE005E3F3B /* Engine */,
 				0C091B392B4BCCCD005E3F3B /* Chess */,
+				0C7A570A2B5A113600011987 /* Utilities */,
 			);
 			path = Swift;
 			sourceTree = "<group>";
@@ -127,8 +138,20 @@
 		0C091B392B4BCCCD005E3F3B /* Chess */ = {
 			isa = PBXGroup;
 			children = (
+				0C7A570B2B5A122300011987 /* InitialBoardConditions.swift */,
+				0C7A570F2B5A3EC300011987 /* Move Validation.swift */,
+				0C7A57112B5A3F3F00011987 /* BitBoard Manipulation.swift */,
 			);
 			path = Chess;
+			sourceTree = "<group>";
+		};
+		0C7A570A2B5A113600011987 /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				0C7A57082B5A112800011987 /* Generic Functions.swift */,
+				0C7A570D2B5A128100011987 /* Magic Variables.swift */,
+			);
+			path = Utilities;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -199,10 +222,15 @@
 			files = (
 				0C091B322B4BC006005E3F3B /* InputWrapper.swift in Sources */,
 				0C091B102B4981E8005E3F3B /* IO.cpp in Sources */,
+				0C7A57092B5A112800011987 /* Generic Functions.swift in Sources */,
 				0C7A57072B566A5D00011987 /* OutputWrapper.swift in Sources */,
 				0C7A57002B52691E00011987 /* InputParser.swift in Sources */,
 				0C75B9792B4F849D00C0B90E /* MasterSync.swift in Sources */,
+				0C7A57122B5A3F3F00011987 /* BitBoard Manipulation.swift in Sources */,
 				0C091B072B4981C7005E3F3B /* main.swift in Sources */,
+				0C7A570C2B5A122300011987 /* InitialBoardConditions.swift in Sources */,
+				0C7A57102B5A3EC300011987 /* Move Validation.swift in Sources */,
+				0C7A570E2B5A128100011987 /* Magic Variables.swift in Sources */,
 				0C091B3D2B4BD2DE005E3F3B /* Settings.swift in Sources */,
 				0C75B9772B4F788800C0B90E /* Protocol.swift in Sources */,
 				0C091B362B4BCCA7005E3F3B /* Engine.swift in Sources */,
