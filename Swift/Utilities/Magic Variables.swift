@@ -94,4 +94,77 @@ struct M {
     static let RANDOM: Int = 0
     
     static let HASMOVED: String = "hasMoved"
+    
+    // Bitboard gameboard edge masks
+    // 0s on the leftmost column
+    private static let fileAMask: UInt64 = 0x7f7f7f7f7f7f7f7f
+    // 0s on the rightmost column
+    private static let fileHMask: UInt64 = 0xfefefefefefefefe
+    // 0s on the top row
+    private static let rank8Mask: UInt64 = 0xFFFFFFFFFFFFFF
+    // 0s on the bottom row
+    private static let rank1Mask: UInt64 = 0xFFFFFFFFFFFFFF00
+    //Full edge mask
+    static let EDGEMASK = ~fileAMask | ~fileHMask | ~rank1Mask | ~rank8Mask
+    // Used to isolate the last 4 bits of the BITSHIFT enum values by ANDing, resulting in the correct integer value of the bit shift
+    static let UINT8LAST4BMASK: UInt8 = 0b00001111
+    
+    enum BITSHIFT {
+        
+        // Left << bit shift
+        case NW
+        case N
+        case NE
+        case E
+        // Right >> bit shift
+        case SE
+        case S
+        case SW
+        case W
+        
+        // Using 8 bit unsigned integers to encode relevant bit shift data
+        //          1   2 3
+        // Binary: |000|1|1001|
+        // Section 1: not used
+        // Section 2: bit shift right = 1, left = 0
+        // Section 3: bit shift amount ranging from 1-9
+        
+        // Left 9
+        static let NWShift: UInt8 = 0b00001001
+        // Left 8
+        static let NShift: UInt8 = 0b00001000
+        // Left 7
+        static let NEShift: UInt8 = 0b00000111
+        // Left 1
+        static let EShift: UInt8 = 0b00000001
+        // Right 9
+        static let SEShift: UInt8 = 0b00011001
+        // Right 8
+        static let SShift: UInt8 = 0b00011000
+        // Right 7
+        static let SWShift: UInt8 = 0b00010111
+        // Right 1
+        static let WShift: UInt8 = 0b00010001
+        
+        var SHIFT: UInt8 {
+            switch self {
+            case .NW:
+                return BITSHIFT.NWShift
+            case .N:
+                return BITSHIFT.NShift
+            case .NE:
+                return BITSHIFT.NEShift
+            case .E:
+                return BITSHIFT.EShift
+            case .SE:
+                return BITSHIFT.SEShift
+            case .S:
+                return BITSHIFT.SShift
+            case .SW:
+                return BITSHIFT.SWShift
+            case .W:
+                return BITSHIFT.WShift
+            }
+        }
+    }
 }
