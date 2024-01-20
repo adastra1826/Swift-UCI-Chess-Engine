@@ -23,7 +23,7 @@
 		0C7A570C2B5A122300011987 /* InitialBoardConditions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C7A570B2B5A122300011987 /* InitialBoardConditions.swift */; };
 		0C7A570E2B5A128100011987 /* Magic Variables.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C7A570D2B5A128100011987 /* Magic Variables.swift */; };
 		0C7A57102B5A3EC300011987 /* Move Validation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C7A570F2B5A3EC300011987 /* Move Validation.swift */; };
-		0C7A57122B5A3F3F00011987 /* BitBoard Manipulation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C7A57112B5A3F3F00011987 /* BitBoard Manipulation.swift */; };
+		0C7A57122B5A3F3F00011987 /* BitBoards.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C7A57112B5A3F3F00011987 /* BitBoards.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -57,7 +57,7 @@
 		0C7A570B2B5A122300011987 /* InitialBoardConditions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialBoardConditions.swift; sourceTree = "<group>"; };
 		0C7A570D2B5A128100011987 /* Magic Variables.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Magic Variables.swift"; sourceTree = "<group>"; };
 		0C7A570F2B5A3EC300011987 /* Move Validation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Move Validation.swift"; sourceTree = "<group>"; };
-		0C7A57112B5A3F3F00011987 /* BitBoard Manipulation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BitBoard Manipulation.swift"; sourceTree = "<group>"; };
+		0C7A57112B5A3F3F00011987 /* BitBoards.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BitBoards.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -140,7 +140,7 @@
 			children = (
 				0C7A570B2B5A122300011987 /* InitialBoardConditions.swift */,
 				0C7A570F2B5A3EC300011987 /* Move Validation.swift */,
-				0C7A57112B5A3F3F00011987 /* BitBoard Manipulation.swift */,
+				0C7A57112B5A3F3F00011987 /* BitBoards.swift */,
 			);
 			path = Chess;
 			sourceTree = "<group>";
@@ -226,7 +226,7 @@
 				0C7A57072B566A5D00011987 /* OutputWrapper.swift in Sources */,
 				0C7A57002B52691E00011987 /* InputParser.swift in Sources */,
 				0C75B9792B4F849D00C0B90E /* MasterSync.swift in Sources */,
-				0C7A57122B5A3F3F00011987 /* BitBoard Manipulation.swift in Sources */,
+				0C7A57122B5A3F3F00011987 /* BitBoards.swift in Sources */,
 				0C091B072B4981C7005E3F3B /* main.swift in Sources */,
 				0C7A570C2B5A122300011987 /* InitialBoardConditions.swift in Sources */,
 				0C7A57102B5A3EC300011987 /* Move Validation.swift in Sources */,
