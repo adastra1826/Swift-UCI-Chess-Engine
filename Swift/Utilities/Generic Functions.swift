@@ -98,17 +98,3 @@ func indexUniqueIDsByCoords<T>(_ array: [[T]]) -> Dictionary<T, [[Int]]> {
         
     return uniqueIDIndexDictionary
 }
-
-func hexStringToUInt64(_ hex: String) -> UInt64? {
-    if let decimalValue = UInt64(hex, radix: 16) {
-        return decimalValue
-    }
-    return nil
-}
-
-func binaryStringToUInt64(_ binary: String) -> UInt64? {
-    if let decimalValue = UInt64(binary, radix: 2) {
-        return decimalValue
-    }
-    return nil
-}
