@@ -24,6 +24,8 @@
 		0C7A570E2B5A128100011987 /* Magic Variables.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C7A570D2B5A128100011987 /* Magic Variables.swift */; };
 		0C7A57102B5A3EC300011987 /* Move Validation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C7A570F2B5A3EC300011987 /* Move Validation.swift */; };
 		0C7A57122B5A3F3F00011987 /* BitBoards.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C7A57112B5A3F3F00011987 /* BitBoards.swift */; };
+		0C87F7AD2B622D280055036B /* TopLevelCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C87F7AC2B622D280055036B /* TopLevelCommand.swift */; };
+		0C87F7AF2B622D7D0055036B /* Options.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C87F7AE2B622D7D0055036B /* Options.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -58,6 +60,8 @@
 		0C7A570D2B5A128100011987 /* Magic Variables.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Magic Variables.swift"; sourceTree = "<group>"; };
 		0C7A570F2B5A3EC300011987 /* Move Validation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Move Validation.swift"; sourceTree = "<group>"; };
 		0C7A57112B5A3F3F00011987 /* BitBoards.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BitBoards.swift; sourceTree = "<group>"; };
+		0C87F7AC2B622D280055036B /* TopLevelCommand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopLevelCommand.swift; sourceTree = "<group>"; };
+		0C87F7AE2B622D7D0055036B /* Options.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Options.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -121,6 +125,7 @@
 			children = (
 				0C091B352B4BCCA7005E3F3B /* Engine.swift */,
 				0C75B9762B4F788800C0B90E /* Protocol.swift */,
+				0C87F7AB2B622D0B0055036B /* Commands */,
 			);
 			path = Engine;
 			sourceTree = "<group>";
@@ -152,6 +157,15 @@
 				0C7A570D2B5A128100011987 /* Magic Variables.swift */,
 			);
 			path = Utilities;
+			sourceTree = "<group>";
+		};
+		0C87F7AB2B622D0B0055036B /* Commands */ = {
+			isa = PBXGroup;
+			children = (
+				0C87F7AC2B622D280055036B /* TopLevelCommand.swift */,
+				0C87F7AE2B622D7D0055036B /* Options.swift */,
+			);
+			path = Commands;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -224,7 +238,9 @@
 				0C091B102B4981E8005E3F3B /* IO.cpp in Sources */,
 				0C7A57092B5A112800011987 /* Generic Functions.swift in Sources */,
 				0C7A57072B566A5D00011987 /* OutputWrapper.swift in Sources */,
+				0C87F7AF2B622D7D0055036B /* Options.swift in Sources */,
 				0C7A57002B52691E00011987 /* InputParser.swift in Sources */,
+				0C87F7AD2B622D280055036B /* TopLevelCommand.swift in Sources */,
 				0C75B9792B4F849D00C0B90E /* MasterSync.swift in Sources */,
 				0C7A57122B5A3F3F00011987 /* BitBoards.swift in Sources */,
 				0C091B072B4981C7005E3F3B /* main.swift in Sources */,
