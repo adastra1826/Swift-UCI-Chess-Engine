@@ -1,5 +1,5 @@
 //
-//  Top Level.swift
+//  TopLevelCommand.swift
 //  Chess-Engine-UCI
 //
 //  Created by Nicholas Doherty on 1/25/24.
@@ -20,6 +20,7 @@ enum TopLevelCommand {
     case go
     case stop
     case ponderhit
+    case help
     case quit
     case unknown
     
@@ -51,10 +52,12 @@ enum TopLevelCommand {
             self = .stop
         case "ponderhit":
             self = .ponderhit
+        case "help":
+            self = .help
         case "quit", "q":
             self = .quit
         default:
             self = .unknown
         }
     }
-
+}
