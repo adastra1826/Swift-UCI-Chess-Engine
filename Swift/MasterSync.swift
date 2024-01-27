@@ -86,14 +86,10 @@ class MasterSynchronizer {
         switch command {
         case .quit:
             sharedData.safeKillAll()
-        case .uci, .isready, .ucinewgame, .stop, .ponderhit:
-            engine.commandNoArgs(command)
-        case .debug, .setoption, .register, .go:
-            engine.commandWithArgs(command, arguments)
         case .unknown:
             log.info("Unknown command")
         default:
-            log.warning("Unknown command. You should never see this log.")
+            engine.command(command, arguments)
         }
     }
     
