@@ -17,15 +17,14 @@ class Engine {
     
     private let outputWrapper: SwiftOutputWrapper
     
-    private lazy var noArgCommandDispatchMap: [TopLevelCommand: () -> Void] = [
+    
+    private lazy var allCommandsDispatchMap: [TopLevelCommand: ([String]) -> Void] = [
         .uci: uciCommand,
         .isready: isreadyCommand,
         .ucinewgame: ucinewgameCommand,
         .stop: stopCommand,
-        .ponderhit: ponderhitCommand
-    ]
-    
-    private lazy var wArgCommandDispatchMap: [TopLevelCommand: ([String]) -> Void] = [
+        .ponderhit: ponderhitCommand,
+        .help: helpCommand,
         .debug: debugCommand,
         .setoption: setoptionCommand,
         .register: registerCommand,
@@ -64,16 +63,8 @@ class Engine {
         }
     }
     
-    func commandNoArgs(_ command: TopLevelCommand) {
-        
-        if let commandFunc = noArgCommandDispatchMap[command] {
-            commandFunc()
-        }
-    }
-    
-    func commandWithArgs(_ command: TopLevelCommand, _ arguments: [String]) {
-        
-        if let commandFunc = wArgCommandDispatchMap[command] {
+    func command(_ command: TopLevelCommand, _ arguments: [String]) {
+        if let commandFunc = allCommandsDispatchMap[command] {
             commandFunc(arguments)
         }
     }
@@ -91,7 +82,7 @@ class Engine {
      After that, the engine should sent "uciok" to acknowledge UCI mode.
      If no uciok is sent within a certain time period, the engine task will be killed by the GUI.
      */
-    private func uciCommand() {
+    private func uciCommand(_ nilArgument: [String]? = nil) {
         idOut()
         optionOut()
         uciokOut()
@@ -104,7 +95,7 @@ class Engine {
      This command is also required once before the engine is asked to do any search to wait for the engine to finish initializing.
      This command must always be answered with "readyok" and can be sent also when the engine is calculating in which case the engine should also immediately answer with "readyok" without stopping the search.
      */
-    private func isreadyCommand() {
+    private func isreadyCommand(_ nilArgument: [String]? = nil) {
         readyokOut()
     }
     
@@ -114,22 +105,28 @@ class Engine {
      The engine should not rely on this command even though all new GUIs should support it.
      As the engine's reaction to "ucinewgame" can take some time the GUI should always send "isready" after "ucinewgame" to wait for the engine to finish its operation.
      */
-    private func ucinewgameCommand() {
-        
+    private func ucinewgameCommand(_ nilArgument: [String]? = nil) {
+        return
     }
     
     /* stop
      Stop calculating as soon as possible, don't forget the "bestmove" and possibly the "ponder" token when finishing the search.
      */
-    private func stopCommand() {
+    private func stopCommand(_ nilArgument: [String]? = nil) {
         bestmoveOut()
     }
     
     /* ponderhit
      The user has played the expected move. This will be sent if the engine was told to ponder on the same move the user has played. The engine should continue searching but switch from pondering to normal search.
      */
-    private func ponderhitCommand() {
-        
+    private func ponderhitCommand(_ nilArgument: [String]? = nil) {
+        return
+    }
+    
+    
+    private func helpCommand(_ nilArgument: [String]? = nil) {
+        log.info("Help stuff")
+        outputWrapper.queue("Help stuff")
     }
     
     ///
@@ -149,7 +146,7 @@ class Engine {
      any time, also when the engine is thinking.
      */
     private func debugCommand(_ arguments: [String]) {
-        
+        return
     }
     
     /* setoption
@@ -166,7 +163,7 @@ class Engine {
          "setoption name NalimovPath value c:\chess\tb\4;c:\chess\tb\5\n"
      */
     private func setoptionCommand(_ arguments: [String]) {
-        
+        return
     }
     
     /* register
@@ -233,7 +230,7 @@ class Engine {
          search until the "stop" command. Do not exit the search without being told so in this mode!
      */
     private func goCommand(_ arguments: [String]) {
-        
+        return
     }
     
     ///
@@ -243,6 +240,7 @@ class Engine {
     ///
     /// ----------------------
     /// Begin output functions
+    ///
 
     /* id
      * name
@@ -365,7 +363,7 @@ class Engine {
         "option name Clear Hash type button\n"
      */
     private func optionOut() {
-        
+        return
     }
     
     /* info
@@ -431,7 +429,7 @@ class Engine {
         The engine should only send this if the option "UCI_ShowCurrLine" is set to true.
      */
     private func infoOut() {
-        
+        return
     }
     
     /* bestmove [ponder]
@@ -441,7 +439,7 @@ class Engine {
      Directly before that the engine should send a final "info" command with the final search information so that the the GUI has the complete statistics about the last search.
      */
     private func bestmoveOut() {
-        
+        return
     }
     
     /*
@@ -454,7 +452,7 @@ class Engine {
      This way the engine knows that the GUI can deal with the registration procedure and the user will be informed that the engine is not properly registered.
      */
     private func registrationOut() {
-        
+        return
     }
     
     /* copyprotection
@@ -472,6 +470,7 @@ class Engine {
             TellGUI("copyprotection error\n");
      */
     private func copyprotectionOut() {
-        
+        log.error("Engine not copy protected")
+        outputWrapper.queue("Engine not copy protected")
     }
 }
