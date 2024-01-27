@@ -21,6 +21,8 @@ class InputParser {
             let topLevelCommand = TopLevelCommand(sanitizedInput)
             let arguments = Array(sanitizedInput.suffix(from: 1))
             masterSync.commandEngine(topLevelCommand, arguments)
+        } else {
+            log.debug("Empty command")
         }
     }
     
@@ -28,7 +30,7 @@ class InputParser {
     func sanitizeInput(_ rawInput: String) -> [String]? {
         let lowercased = rawInput.lowercased()
         let components = lowercased.components(separatedBy: " ")
-        guard components.first != nil else { return nil }
+        guard components.first != "" else { return nil }
         return components
     }
 }
