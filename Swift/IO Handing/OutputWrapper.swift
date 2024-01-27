@@ -7,39 +7,7 @@
 
 import Foundation
 
-// Buffer allocator for passing text from C++ to Swift
-// C++ writes output to the buffer provided by Swift
-// Swift casts the resulting text to a String
-class C__stdout_OutputWrapper {
-    
-    /*
-    private var bufferSize: Int
-    private var buffer: UnsafeMutablePointer<CChar>
-
-    init(_ bufferSize: Int) {
-        self.bufferSize = bufferSize
-        self.buffer = UnsafeMutablePointer<CChar>.allocate(capacity: bufferSize)
-    }
-
-    deinit {
-        self.buffer.deallocate()
-    }
-
-    func outputString() -> String {
-        
-        // Call C++ input listening function
-        get_input(buffer, Int32(bufferSize))
-        
-        // Copy input result from allocated memory into a String
-        let result = String(cString: buffer)
-        
-        return result
-    }
-     */
-    
-    
-}
-
+// Receive Strings, queue them to a buffer for Engine output. The buffer is checked 10x/second
 class SwiftOutputWrapper {
     
     private let queue: DispatchQueue
