@@ -260,35 +260,31 @@ Engine to GUI:
 		Certain options have a fixed value for , which means that the semantics of this option is fixed.
 		Usually those options should not be displayed in the normal engine options window of the GUI but get a special treatment. "Pondering" for example should be set automatically when pondering is enabled or disabled in the GUI options. The same for "UCI_AnalyseMode" which should also be set automatically by the GUI. All those certain options have the prefix "UCI_" except for the first 6 options below. If the GUI get an unknown Option with the prefix "UCI_", it should just ignore it and not display it in the engine's options dialog.
 		*  = Hash, type is spin
-			the value in MB for memory for hash tables can be changed.
+			Value in MB for memory for hash tables.
             This should be answered with the first "setoptions" command at program boot if the engine has sent the appropriate "option name Hash" command, which should be supported by all engines!
 			So the engine should use a very small hash first as default.
 		*  = NalimovPath, type string
-			this is the path on the hard disk to the Nalimov compressed format.
+			Path on the hard disk to the Nalimov compressed format.
 			Multiple directories can be concatenated with ";"
 		*  = NalimovCache, type spin
-			this is the size in MB for the cache for the nalimov table bases
+			Size in MB for the cache for the nalimov table bases.
 			These last two options should also be present in the initial options exchange dialog
 			when the engine is booted if the engine supports it
 		*  = Ponder, type check
-			this means that the engine is able to ponder.
-			The GUI will send this whenever pondering is possible or not.
-			Note: The engine should not start pondering on its own if this is enabled, this option is only
-			needed because the engine might change its time management algorithm when pondering is allowed.
+            The engine may/may not ponder.
+			Note: The engine should not start pondering on its own if this is enabled, this option is only needed because the engine might change its time management algorithm when pondering is allowed.
 		*  = OwnBook, type check
-			this means that the engine has its own book which is accessed by the engine itself.
-			if this is set, the engine takes care of the opening book and the GUI will never
-			execute a move out of its book for the engine. If this is set to false by the GUI,
-			the engine should not access its own book.
+			The engine has its own book which is accessed by the engine itself.
+			If this is set, the engine takes care of the opening book and the GUI will never execute a move out of its book for the engine. If this is set to false by the GUI, the engine should not access its own book.
 		*  = MultiPV, type spin
-			the engine supports multi best line or k-best mode. the default value is 1
+			The engine supports multi best line or k-best mode. the default value is 1
 		*  = UCI_ShowCurrLine, type check, should be false by default,
-			the engine can show the current line it is calculating. see "info currline" above.
+			The engine can show the current line it is calculating. see "info currline" above.
 		*  = UCI_ShowRefutations, type check, should be false by default,
-			the engine can show a move and its refutation in a line. see "info refutations" above.
+			The engine can show a move and its refutation in a line. see "info refutations" above.
 		*  = UCI_LimitStrength, type check, should be false by default,
-			The engine is able to limit its strength to a specific Elo number,
-		   This should always be implemented together with "UCI_Elo".
+			The engine is able to limit its strength to a specific Elo number.
+            This should always be implemented together with "UCI_Elo".
 		*  = UCI_Elo, type spin
 			The engine can limit its strength in Elo within this interval.
 			If UCI_LimitStrength is set to false, this value should be ignored.
@@ -299,9 +295,8 @@ Engine to GUI:
 		   For example when playing it can use some kind of learning.
 		   This is set to false if the engine is playing a game, otherwise it is true.
 		 *  = UCI_Opponent, type string
-		   With this command the GUI can send the name, title, elo and if the engine is playing a human
-		   or computer to the engine.
-		   The format of the string has to be [GM|IM|FM|WGM|WIM|none] [|none] [computer|human] 
+		   With this command the GUI can send the name, title, elo and if the engine is playing a human or computer to the engine.
+		   The format of the string has to be [GM|IM|FM|WGM|WIM|none] [|none] [computer|human]
 		   Example:
 		   "setoption name UCI_Opponent value GM 2800 human Gary Kasparow"
 		   "setoption name UCI_Opponent value none none computer Shredder"
