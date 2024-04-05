@@ -32,7 +32,7 @@ struct InitialBoardConditions {
         return bbTileID[x][y]
     }
     
-    // Batch of specfic TileIDs
+    // Return batch of specfic TileIDs by [coordinate locations]
     static func getTileIDs(_ coords: [[Int]]) -> [String] {
         var IDs: [String] = []
         guard !coords.isEmpty else { return [] }
