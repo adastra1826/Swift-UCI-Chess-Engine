@@ -10,8 +10,12 @@ import Foundation
 class SharedData {
    
     private let quitSwitchQueue: DispatchQueue
+    private let UUIDQueue: DispatchQueue
     
     private var masterQuitSwitch: Bool
+    
+    var activeThreadUUIDs: [UUID] = []
+    var terminatedThreadUUIDs: [UUID] = []
     
     struct Info {
         static let author = "Nicholas Doherty"
@@ -20,6 +24,7 @@ class SharedData {
     
     init() {
         quitSwitchQueue = DispatchQueue(label: "com.PeerlessApps.Chess.quitSwitchQueue")
+        UUIDQueue = DispatchQueue(label: "com.PeerlessApps.Chess.UUIDQueue")
         masterQuitSwitch = false
     }
     
@@ -32,6 +37,21 @@ class SharedData {
     public func safeKillAll() {
         quitSwitchQueue.sync {
             masterQuitSwitch = true
+        }
+    }
+    
+    public func generateNewUUID() -> UUID {
+        let newUUID = UUID()
+        UUIDQueue.sync {
+            activeThreadUUIDs.append(newUUID)
+        }
+        return newUUID
+    }
+    
+    public func terminateUUID(_ oldUUID: UUID) {
+        UUIDQueue.sync {
+            activeThreadUUIDs.removeAll(where: { $0 == oldUUID} )
+            terminatedThreadUUIDs.append(oldUUID)
         }
     }
 }
