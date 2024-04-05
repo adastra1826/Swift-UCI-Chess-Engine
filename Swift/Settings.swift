@@ -19,13 +19,13 @@ class Settings {
     
     class _Engine {
         
-        let options: _Options
+        //let options: MasterOptionsValidation
         
         private let queue: DispatchQueue
         private var maxNumberSearchThreads: Int
         
         init() {
-            options = _Options()
+            //options = MasterOptionsValidation()
             queue = DispatchQueue(label: "com.peerlessApps.chess.settings_EngineQueue")
             maxNumberSearchThreads = DefaultEngineSettings.maxNumberSearchThreads
         }
