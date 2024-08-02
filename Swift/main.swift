@@ -8,16 +8,15 @@
 import Foundation
 import XCGLogger
 
-let settings = Settings()
 let log = XCGLogger.default
 
 log.setup(level: .info, showThreadName: true, showLevel: true, showFileNames: true, showLineNumbers: true, writeToFile: "/Users/nicholasdoherty/Desktop/log.txt", fileLevel: .debug)
 
 log.logAppDetails()
 
-let sharedData = SharedData()
-let masterSync = MasterSynchronizer()
+private let settings = Parameters()
+private let sharedData = SharedData()
 
-log.info("Starting main threads")
+let master = EngineMaster(settings, sharedData)
 
-masterSync.startAll()
+master.start()
