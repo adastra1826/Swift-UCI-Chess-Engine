@@ -1,5 +1,5 @@
 //
-//  Settings.swift
+//  Parameters.swift
 //  Chess-Engine-UCI
 //
 //  Consider modiifying this to reflect static variables that cannot be changed
