@@ -20,7 +20,7 @@ class InputParser {
         if let sanitizedInput = sanitizeInput(rawInput) {
             let topLevelCommand = TopLevelCommand(sanitizedInput)
             let arguments = Array(sanitizedInput.suffix(from: 1))
-            masterSync.commandEngine(topLevelCommand, arguments)
+            master.commandEngine(topLevelCommand, arguments)
         } else {
             log.debug("Empty command")
         }
