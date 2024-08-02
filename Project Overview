@@ -1,0 +1,7 @@
+Hierarchy
+
+main
+(Settings, SharedData) -> EngineMaster
+
+EngineMaster
+inputWraper, outputWrapper, engine

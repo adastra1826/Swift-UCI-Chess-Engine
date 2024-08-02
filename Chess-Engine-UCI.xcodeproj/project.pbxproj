@@ -7,13 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0C0883872C5D7CEC002791E7 /* PhaseControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C0883862C5D7CEC002791E7 /* PhaseControl.swift */; };
+		0C0883892C5D7D0F002791E7 /* CommandDispatch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C0883882C5D7D0F002791E7 /* CommandDispatch.swift */; };
 		0C091B072B4981C7005E3F3B /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C091B062B4981C7005E3F3B /* main.swift */; };
 		0C091B102B4981E8005E3F3B /* IO.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0C091B0E2B4981E8005E3F3B /* IO.cpp */; };
 		0C091B322B4BC006005E3F3B /* InputWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C091B312B4BC006005E3F3B /* InputWrapper.swift */; };
 		0C091B362B4BCCA7005E3F3B /* Engine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C091B352B4BCCA7005E3F3B /* Engine.swift */; };
-		0C091B3D2B4BD2DE005E3F3B /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C091B3C2B4BD2DE005E3F3B /* Settings.swift */; };
+		0C091B3D2B4BD2DE005E3F3B /* Parameters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C091B3C2B4BD2DE005E3F3B /* Parameters.swift */; };
 		0C75B9772B4F788800C0B90E /* Protocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C75B9762B4F788800C0B90E /* Protocol.swift */; };
-		0C75B9792B4F849D00C0B90E /* MasterSync.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C75B9782B4F849D00C0B90E /* MasterSync.swift */; };
+		0C75B9792B4F849D00C0B90E /* EngineMaster.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C75B9782B4F849D00C0B90E /* EngineMaster.swift */; };
 		0C75B97B2B4FA78000C0B90E /* SharedData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C75B97A2B4FA78000C0B90E /* SharedData.swift */; };
 		0C7A57002B52691E00011987 /* InputParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C7A56FF2B52691E00011987 /* InputParser.swift */; };
 		0C7A57032B565A4B00011987 /* ObjcExceptionBridging in Frameworks */ = {isa = PBXBuildFile; productRef = 0C7A57022B565A4B00011987 /* ObjcExceptionBridging */; };
@@ -29,7 +31,7 @@
 		0CA3DBDB2BBF27EC0037B33A /* SearchThread.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CA3DBDA2BBF27EC0037B33A /* SearchThread.swift */; };
 		0CA3DBDE2BBF293B0037B33A /* ThreadOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CA3DBDD2BBF293B0037B33A /* ThreadOptions.swift */; };
 		0CA3DBE02BBF38840037B33A /* EngineOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CA3DBDF2BBF38840037B33A /* EngineOptions.swift */; };
-		0CA3DBE22BBF42490037B33A /* OptionDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CA3DBE12BBF42490037B33A /* OptionDefaults.swift */; };
+		0CA3DBE22BBF42490037B33A /* OptionParameters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CA3DBE12BBF42490037B33A /* OptionParameters.swift */; };
 		0CA3DBE42BBF85070037B33A /* OptionProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CA3DBE32BBF85070037B33A /* OptionProtocols.swift */; };
 /* End PBXBuildFile section */
 
@@ -46,6 +48,9 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		0C0883852C5D44C9002791E7 /* Project Overview */ = {isa = PBXFileReference; lastKnownFileType = text; path = "Project Overview"; sourceTree = "<group>"; };
+		0C0883862C5D7CEC002791E7 /* PhaseControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhaseControl.swift; sourceTree = "<group>"; };
+		0C0883882C5D7D0F002791E7 /* CommandDispatch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommandDispatch.swift; sourceTree = "<group>"; };
 		0C091B032B4981C7005E3F3B /* Chess-Engine-UCI */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "Chess-Engine-UCI"; sourceTree = BUILT_PRODUCTS_DIR; };
 		0C091B062B4981C7005E3F3B /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		0C091B0D2B4981E8005E3F3B /* BridgingHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BridgingHeader.h; sourceTree = "<group>"; };
@@ -54,9 +59,9 @@
 		0C091B302B4BBC95005E3F3B /* UCI_Protocol.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = UCI_Protocol.txt; sourceTree = "<group>"; };
 		0C091B312B4BC006005E3F3B /* InputWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputWrapper.swift; sourceTree = "<group>"; };
 		0C091B352B4BCCA7005E3F3B /* Engine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Engine.swift; sourceTree = "<group>"; };
-		0C091B3C2B4BD2DE005E3F3B /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
+		0C091B3C2B4BD2DE005E3F3B /* Parameters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Parameters.swift; sourceTree = "<group>"; };
 		0C75B9762B4F788800C0B90E /* Protocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Protocol.swift; sourceTree = "<group>"; };
-		0C75B9782B4F849D00C0B90E /* MasterSync.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MasterSync.swift; sourceTree = "<group>"; };
+		0C75B9782B4F849D00C0B90E /* EngineMaster.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EngineMaster.swift; sourceTree = "<group>"; };
 		0C75B97A2B4FA78000C0B90E /* SharedData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedData.swift; sourceTree = "<group>"; };
 		0C7A56FF2B52691E00011987 /* InputParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputParser.swift; sourceTree = "<group>"; };
 		0C7A57062B566A5D00011987 /* OutputWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutputWrapper.swift; sourceTree = "<group>"; };
@@ -70,7 +75,7 @@
 		0CA3DBDA2BBF27EC0037B33A /* SearchThread.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchThread.swift; sourceTree = "<group>"; };
 		0CA3DBDD2BBF293B0037B33A /* ThreadOptions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThreadOptions.swift; sourceTree = "<group>"; };
 		0CA3DBDF2BBF38840037B33A /* EngineOptions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EngineOptions.swift; sourceTree = "<group>"; };
-		0CA3DBE12BBF42490037B33A /* OptionDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionDefaults.swift; sourceTree = "<group>"; };
+		0CA3DBE12BBF42490037B33A /* OptionParameters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionParameters.swift; sourceTree = "<group>"; };
 		0CA3DBE32BBF85070037B33A /* OptionProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionProtocols.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -90,6 +95,7 @@
 		0C091AFA2B4981C7005E3F3B = {
 			isa = PBXGroup;
 			children = (
+				0C0883852C5D44C9002791E7 /* Project Overview */,
 				0C091B302B4BBC95005E3F3B /* UCI_Protocol.txt */,
 				0C091B0D2B4981E8005E3F3B /* BridgingHeader.h */,
 				0C091B2F2B4BB89A005E3F3B /* C++ */,
@@ -110,9 +116,9 @@
 			isa = PBXGroup;
 			children = (
 				0C091B062B4981C7005E3F3B /* main.swift */,
-				0C091B3C2B4BD2DE005E3F3B /* Settings.swift */,
+				0C091B3C2B4BD2DE005E3F3B /* Parameters.swift */,
 				0C75B97A2B4FA78000C0B90E /* SharedData.swift */,
-				0C75B9782B4F849D00C0B90E /* MasterSync.swift */,
+				0C75B9782B4F849D00C0B90E /* EngineMaster.swift */,
 				0C091B382B4BCCBE005E3F3B /* IO Handing */,
 				0C091B372B4BCCAE005E3F3B /* Engine */,
 				0C091B392B4BCCCD005E3F3B /* Chess */,
@@ -134,6 +140,8 @@
 			isa = PBXGroup;
 			children = (
 				0C091B352B4BCCA7005E3F3B /* Engine.swift */,
+				0C0883862C5D7CEC002791E7 /* PhaseControl.swift */,
+				0C0883882C5D7D0F002791E7 /* CommandDispatch.swift */,
 				0C75B9762B4F788800C0B90E /* Protocol.swift */,
 				0C87F7AB2B622D0B0055036B /* Commands */,
 				0CA3DBDC2BBF29210037B33A /* Threads */,
@@ -175,7 +183,7 @@
 			isa = PBXGroup;
 			children = (
 				0C87F7AC2B622D280055036B /* TopLevelCommand.swift */,
-				0CA3DBE12BBF42490037B33A /* OptionDefaults.swift */,
+				0CA3DBE12BBF42490037B33A /* OptionParameters.swift */,
 				0CA3DBE32BBF85070037B33A /* OptionProtocols.swift */,
 				0CA3DBDF2BBF38840037B33A /* EngineOptions.swift */,
 			);
@@ -258,6 +266,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0C091B322B4BC006005E3F3B /* InputWrapper.swift in Sources */,
+				0C0883872C5D7CEC002791E7 /* PhaseControl.swift in Sources */,
 				0CA3DBE02BBF38840037B33A /* EngineOptions.swift in Sources */,
 				0C091B102B4981E8005E3F3B /* IO.cpp in Sources */,
 				0CA3DBDE2BBF293B0037B33A /* ThreadOptions.swift in Sources */,
@@ -265,14 +274,15 @@
 				0C7A57072B566A5D00011987 /* OutputWrapper.swift in Sources */,
 				0C7A57002B52691E00011987 /* InputParser.swift in Sources */,
 				0C87F7AD2B622D280055036B /* TopLevelCommand.swift in Sources */,
-				0CA3DBE22BBF42490037B33A /* OptionDefaults.swift in Sources */,
-				0C75B9792B4F849D00C0B90E /* MasterSync.swift in Sources */,
+				0CA3DBE22BBF42490037B33A /* OptionParameters.swift in Sources */,
+				0C75B9792B4F849D00C0B90E /* EngineMaster.swift in Sources */,
 				0C7A57122B5A3F3F00011987 /* BitBoardUtilities.swift in Sources */,
 				0C091B072B4981C7005E3F3B /* main.swift in Sources */,
 				0C7A570C2B5A122300011987 /* InitialBoardConditions.swift in Sources */,
 				0C7A57102B5A3EC300011987 /* Move Validation.swift in Sources */,
+				0C0883892C5D7D0F002791E7 /* CommandDispatch.swift in Sources */,
 				0C7A570E2B5A128100011987 /* Magic Variables.swift in Sources */,
-				0C091B3D2B4BD2DE005E3F3B /* Settings.swift in Sources */,
+				0C091B3D2B4BD2DE005E3F3B /* Parameters.swift in Sources */,
 				0C75B9772B4F788800C0B90E /* Protocol.swift in Sources */,
 				0C091B362B4BCCA7005E3F3B /* Engine.swift in Sources */,
 				0CA3DBDB2BBF27EC0037B33A /* SearchThread.swift in Sources */,
@@ -408,6 +418,7 @@
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
+				MACOSX_DEPLOYMENT_TARGET = 14.2;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = BridgingHeader.h;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -420,6 +431,7 @@
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
+				MACOSX_DEPLOYMENT_TARGET = 14.2;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = BridgingHeader.h;
 				SWIFT_VERSION = 5.0;
