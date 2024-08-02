@@ -10,15 +10,19 @@ import Foundation
 class Engine {
     
     // Max number of concurrent searching threads
-    private let searchThreadPermits: DispatchSemaphore
+    private let _searchThreadPermits: DispatchSemaphore
+    
+    private let _updateThreadOptionsQueue: DispatchQueue
     
     // Stop calculating ASAP
-    private let stopCondition: NSCondition
+    private let _stopCondition: NSCondition
     
-    private let outputWrapper: SwiftOutputWrapper
+    private let _outputWrapper: SwiftOutputWrapper
+    
+    private var _threadOptions: [ThreadOptions]
     
     
-    private lazy var allCommandsDispatchMap: [TopLevelCommand: ([String]) -> Void] = [
+    private lazy var _allCommandsDispatchMap: [TopLevelCommand: ([String]) -> Void] = [
         .uci: uciCommand,
         .isready: isreadyCommand,
         .ucinewgame: ucinewgameCommand,
@@ -34,27 +38,31 @@ class Engine {
     
     init(_ outputWrapper: SwiftOutputWrapper) {
         
-        self.outputWrapper = outputWrapper
+        self._outputWrapper = outputWrapper
         
-        searchThreadPermits = DispatchSemaphore(value: settings.engine.getMaxThreads())
+        _searchThreadPermits = DispatchSemaphore(value: settings.engine.getMaxThreads())
         
-        stopCondition = NSCondition()
+        _updateThreadOptionsQueue = DispatchQueue(label: "com.peerlessApps.chess._updateThreadOptionsQueue")
+        
+        _stopCondition = NSCondition()
+        
+        _threadOptions = []
     }
     
     func start() {
         
         log.info("Start engine")
         
-        fakeStart()
+        _fakeStart()
         
         log.info("Stop engine")
     }
     
-    private func fakeStart() {
+    private func _fakeStart() {
         
         var count = 0
         
-        while !sharedData.safeMirrorMasterQuit() {
+        while !sharedData.masterQuit() {
             
             count += 1
             //print(count)
@@ -63,9 +71,19 @@ class Engine {
         }
     }
     
+    private func _generateNewSearchThread() {
+        
+    }
+    
+    private func _updateThreadOptions() {
+        
+    }
+    
     func command(_ command: TopLevelCommand, _ arguments: [String]) {
-        if let commandFunc = allCommandsDispatchMap[command] {
+        if let commandFunc = _allCommandsDispatchMap[command] {
             commandFunc(arguments)
+        } else {
+            log.alert("Unable to map \(command) to function in engine")
         }
     }
     
@@ -126,7 +144,7 @@ class Engine {
     
     private func helpCommand(_ nilArgument: [String]? = nil) {
         log.info("Help stuff")
-        outputWrapper.queue("Help stuff")
+        _outputWrapper.queue("Help stuff")
     }
     
     ///
@@ -181,7 +199,7 @@ class Engine {
      */
     private func registerCommand(_ arguments: [String]) {
         log.error("Registration not supported")
-        outputWrapper.queue("Registration not supported")
+        _outputWrapper.queue("Registration not supported")
     }
     
     /* position
@@ -251,15 +269,15 @@ class Engine {
          e.g. "id author Stefan MK\n
      */
     private func idOut() {
-        outputWrapper.queue("id name \(SharedData.Info.engine)")
-        outputWrapper.queue("id author \(SharedData.Info.author)")
+        _outputWrapper.queue("id name \(SharedData.Info.engine)")
+        _outputWrapper.queue("id author \(SharedData.Info.author)")
     }
     
     /*
      Must be sent after the id and optional options to tell the GUI that the engine has sent all infos and is ready in uci mode.
      */
     private func uciokOut() {
-        outputWrapper.queue("uciok")
+        _outputWrapper.queue("uciok")
     }
     
     /* readyok
@@ -267,7 +285,7 @@ class Engine {
      It is usually sent after a command that can take some time to be able to wait for the engine, but it can be used anytime, even when the engine is searching.
      */
     private func readyokOut() {
-        outputWrapper.queue("readyok")
+        _outputWrapper.queue("readyok")
     }
     
     /* option
@@ -471,6 +489,6 @@ class Engine {
      */
     private func copyprotectionOut() {
         log.error("Engine not copy protected")
-        outputWrapper.queue("Engine not copy protected")
+        _outputWrapper.queue("Engine not copy protected")
     }
 }
