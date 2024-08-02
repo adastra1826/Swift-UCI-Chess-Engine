@@ -7,7 +7,7 @@
 
 import Foundation
 
-class MasterSynchronizer {
+class EngineMaster {
     
     private let inputWrapper: SwiftInputWrapper
     private let outputWrapper: SwiftOutputWrapper
@@ -28,7 +28,7 @@ class MasterSynchronizer {
         quitSwitch = sharedData.masterQuit()
     }
     
-    public func startAll() {
+    public func bstartAll() {
         
         let inputThread = Thread { [weak self] in
             self?.startInput()

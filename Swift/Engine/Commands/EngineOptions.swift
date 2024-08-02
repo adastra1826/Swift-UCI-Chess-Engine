@@ -9,48 +9,47 @@ import Foundation
 
 class EngineOptions {
     
-    private let _changeOptionQueue: DispatchQueue
-    private let _mergeOptionQueue: DispatchQueue
+    private let changeOptionQueue: DispatchQueue
+    private let mergeOptionQueue: DispatchQueue
     
     var currentOptions: [any Option]
-    var tempOptions: [any Option]
+    private var tempOptions: [any Option]
     
     init() {
         
-        _changeOptionQueue = DispatchQueue(label: "com.peerlessApps.chess._changeOptionQueue")
-        _mergeOptionQueue = DispatchQueue(label: "com.peerlessApps.chess._mergeOptionQueue")
+        changeOptionQueue = DispatchQueue(label: "com.PeerlessApps.chess.changeOptionQueue")
+        mergeOptionQueue = DispatchQueue(label: "com.PeerlessApps.chess.mergeOptionQueue")
         
-        let allOptions = AllOptions()
-        currentOptions = allOptions.getAllOptions()
-        tempOptions = allOptions.getAllOptions()
+        currentOptions = DefaultOptionsValues.options
+        tempOptions = DefaultOptionsValues.options
     }
     
     func changeOption(_ option: String, _ argument: Any) throws {
         
-        try _changeOptionQueue.sync {
+        try changeOptionQueue.sync {
             
             if let currentOption = tempOptions.first(where: { $0.name == option }) {
                 
                 var throwAlert = false
                 
                 switch currentOption {
-                case var checkOption as OptionDefaults.CheckOption:
+                case var checkOption as OptionParameters.CheckOption:
                     if !checkOption.isValid(argument as! Bool) {
                         throwAlert = true
                     }
-                case var spinOption as OptionDefaults.SpinOption:
+                case var spinOption as OptionParameters.SpinOption:
                     if !spinOption.isValid(argument as! Int) {
                         throwAlert = true
                     }
-                case var stringOption as OptionDefaults.StringOption:
+                case var stringOption as OptionParameters.StringOption:
                     if !stringOption.isValid(argument as! String) {
                         throwAlert = true
                     }
-                case var comboOption as OptionDefaults.ComboOption:
+                case var comboOption as OptionParameters.ComboOption:
                     if !comboOption.isValid(argument as! String) {
                         throwAlert = true
                     }
-                case var buttonOption as OptionDefaults.ButtonOption:
+                case var buttonOption as OptionParameters.ButtonOption:
                     if !buttonOption.isValid(argument as! Void) {
                         throwAlert = true
                     }
@@ -62,14 +61,14 @@ class EngineOptions {
                     throw SharedData.ErrorTypes.alert(message: "Unable to set option \(option) to \(argument)")
                 }
             }
-            _mergeOptionQueue.sync {
+            mergeOptionQueue.sync {
                 currentOptions = tempOptions
             }
         }
     }
     
     func dispatchOptions() -> [any Option] {
-        _mergeOptionQueue.sync {
+        mergeOptionQueue.sync {
             return currentOptions
         }
     }

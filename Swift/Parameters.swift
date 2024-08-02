@@ -2,40 +2,45 @@
 //  Settings.swift
 //  Chess-Engine-UCI
 //
+//  Consider modiifying this to reflect static variables that cannot be changed
+//
 //  Created by Nicholas Doherty on 1/8/24.
 //
 
 import Foundation
 
-class Settings {
+class Parameters {
     
-    let lock: NSLock
-    let engine: _Engine
+    let engine: Engine
     
     init() {
-        lock = NSLock()
-        engine = _Engine()
+        engine = Engine()
+        
+        log.debug("Settings initialized")
     }
     
-    class _Engine {
+    class Engine {
         
-        //let options: MasterOptionsValidation
+        private let engineSettingsQueue: DispatchQueue
+        //let threads: Threads
         
-        private let queue: DispatchQueue
         private var maxNumberSearchThreads: Int
         
         init() {
-            //options = MasterOptionsValidation()
-            queue = DispatchQueue(label: "com.peerlessApps.chess.settings_EngineQueue")
+            engineSettingsQueue = DispatchQueue(label: "com.PeerlessApps.chess.engineSettingsQueue")
+            //threads = Threads()
+            
             maxNumberSearchThreads = DefaultEngineSettings.maxNumberSearchThreads
         }
+        
+        //class Threads { }
         
         struct DefaultEngineSettings {
             static let maxNumberSearchThreads = 3
         }
         
         func getMaxThreads() -> Int {
-            queue.sync {
+            engineSettingsQueue.sync {
                 return maxNumberSearchThreads
             }
         }

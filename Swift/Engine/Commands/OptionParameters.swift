@@ -17,55 +17,55 @@ struct AllOptions {
     
     private mutating func initOptions() {
         options = [
-            OptionDefaults.CheckOption(
+            OptionParameters.CheckOption(
                 name: "Ponder",
                 defaultValue: true
             ),
-            OptionDefaults.CheckOption(
+            OptionParameters.CheckOption(
                 name: "OwnBook",
                 defaultValue: false
             ),
-            OptionDefaults.CheckOption(
+            OptionParameters.CheckOption(
                 name: "UCIShowCurrLine",
                 defaultValue: false
             ),
-            OptionDefaults.CheckOption(
+            OptionParameters.CheckOption(
                 name: "UCIShowRefutations",
                 defaultValue: false
             ),
-            OptionDefaults.CheckOption(
+            OptionParameters.CheckOption(
                 name: "UCILimitStrength",
                 defaultValue: false
             ),
-            OptionDefaults.CheckOption(
+            OptionParameters.CheckOption(
                 name: "UCIAnalyzeMode",
                 defaultValue: false
             ),
-            OptionDefaults.SpinOption(
+            OptionParameters.SpinOption(
                 name: "Hash",
                 defaultValue: 100,
                 minValue: 100,
                 maxValue: 1000
             ),
-            OptionDefaults.SpinOption(
+            OptionParameters.SpinOption(
                 name: "NalimovCache",
                 defaultValue: 100,
                 minValue: 1,
                 maxValue: 1024
             ),
-            OptionDefaults.SpinOption(
+            OptionParameters.SpinOption(
                 name: "MultiPV",
                 defaultValue: 1,
                 minValue: 1,
                 maxValue: 100
             ),
-            OptionDefaults.SpinOption(
+            OptionParameters.SpinOption(
                 name: "UCIElo",
                 defaultValue: 1500,
                 minValue: 1,
                 maxValue: 3000
             ),
-            OptionDefaults.ComboOption(
+            OptionParameters.ComboOption(
                 name: "Aggressiveness",
                 defaultValue: "Neutral",
                 possibleValues: [
@@ -74,7 +74,7 @@ struct AllOptions {
                     "Aggresive"
                 ]
             ),
-            OptionDefaults.StringOption(
+            OptionParameters.StringOption(
                 name: "UCIOpponent",
                 defaultValue: "None"
             )
@@ -86,7 +86,7 @@ struct AllOptions {
     }
 }
 
-struct OptionDefaults {
+struct OptionParameters {
     
     struct CheckOption: CheckOptionProtocol, Option {
         
