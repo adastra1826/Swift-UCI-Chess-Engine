@@ -10,7 +10,7 @@ import Foundation
 // Buffer allocator for passing text from C++ to Swift
 // C++ writes output to the buffer provided by Swift
 // Swift casts the resulting text to a String
-class CppstdinInputWrapper {
+class CPPstdinInputWrapper {
     
     private var _bufferSize: Int
     private var _buffer: UnsafeMutablePointer<CChar>
@@ -38,15 +38,15 @@ class CppstdinInputWrapper {
 
 class SwiftInputWrapper {
     
-    let cInputWrapper: CppstdinInputWrapper
-    let inputParser: InputParser
+    private let cInputWrapper: CPPstdinInputWrapper
+    private let inputParser: InputParser
     
     init() {
-        cInputWrapper = CppstdinInputWrapper(50)
+        cInputWrapper = CPPstdinInputWrapper(50)
         inputParser = InputParser()
     }
     
-    func start() {
+    public func start() {
         
         log.info("Start SwiftInputWrapper")
         
@@ -55,11 +55,6 @@ class SwiftInputWrapper {
             let rawInput = cInputWrapper.getString()
             
             inputParser.parse(rawInput)
-            
-            if sharedData.masterQuit() {
-                log.info("End SwiftInputWrapper: master quit")
-                break
-            }
         }
     }
 }
