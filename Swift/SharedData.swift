@@ -22,13 +22,19 @@ class SharedData {
         static let engine = "Peerless Chess Engine"
     }
     
+    enum ErrorTypes: Error {
+        case alert(message: String)
+        case warning(message: String)
+        case fatal(message: String)
+    }
+    
     init() {
         quitSwitchQueue = DispatchQueue(label: "com.PeerlessApps.Chess.quitSwitchQueue")
         UUIDQueue = DispatchQueue(label: "com.PeerlessApps.Chess.UUIDQueue")
         masterQuitSwitch = false
     }
     
-    public func safeMirrorMasterQuit() -> Bool {
+    public func masterQuit() -> Bool {
         quitSwitchQueue.sync {
             return sharedData.masterQuitSwitch
         }

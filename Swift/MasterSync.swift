@@ -25,7 +25,7 @@ class MasterSynchronizer {
         
         masterThreadGroup = DispatchGroup()
         
-        quitSwitch = sharedData.safeMirrorMasterQuit()
+        quitSwitch = sharedData.masterQuit()
     }
     
     public func startAll() {
@@ -52,7 +52,7 @@ class MasterSynchronizer {
             Thread.sleep(forTimeInterval: 0.5)
             //log.verbose(".")
             
-            if sharedData.safeMirrorMasterQuit() {
+            if sharedData.masterQuit() {
                 log.info("Break from MasterSynchronizer")
                 break
             }
