@@ -9,6 +9,12 @@ import Foundation
 
 struct ThreadOptions {
     
-    let threadUUID: UUID
+    let version: Int
+    let options: [any Option]
+    
+    init(version: Int, options: [any Option]) {
+        self.version = version
+        self.options = options
+    }
     
 }
