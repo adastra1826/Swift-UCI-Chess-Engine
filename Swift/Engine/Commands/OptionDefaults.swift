@@ -9,52 +9,103 @@ import Foundation
 
 struct AllOptions {
     
-    private let allOptions: [any Option] = [
-        AllOptionDefaultSettings.Ponder(),
-        AllOptionDefaultSettings.OwnBook(),
-        AllOptionDefaultSettings.UCIShowCurrLine(),
-        AllOptionDefaultSettings.UCIShowRefutations(),
-        AllOptionDefaultSettings.UCILimitStrength(),
-        AllOptionDefaultSettings.UCIAnalyzeMode(),
-        AllOptionDefaultSettings.Hash(),
-        AllOptionDefaultSettings.NalimovCache(),
-        AllOptionDefaultSettings.MultiPV(),
-        AllOptionDefaultSettings.UCIElo(),
-        AllOptionDefaultSettings.Aggressiveness(),
-        AllOptionDefaultSettings.UCIOpponent()
-    ]
+    private var options: [any Option]
     
-    func initializeAllOptions() -> [any Option] {
-        return allOptions
+    init() {
+        options = []
+    }
+    
+    private mutating func initOptions() {
+        options = [
+            OptionDefaults.CheckOption(
+                name: "Ponder",
+                defaultValue: true
+            ),
+            OptionDefaults.CheckOption(
+                name: "OwnBook",
+                defaultValue: false
+            ),
+            OptionDefaults.CheckOption(
+                name: "UCIShowCurrLine",
+                defaultValue: false
+            ),
+            OptionDefaults.CheckOption(
+                name: "UCIShowRefutations",
+                defaultValue: false
+            ),
+            OptionDefaults.CheckOption(
+                name: "UCILimitStrength",
+                defaultValue: false
+            ),
+            OptionDefaults.CheckOption(
+                name: "UCIAnalyzeMode",
+                defaultValue: false
+            ),
+            OptionDefaults.SpinOption(
+                name: "Hash",
+                defaultValue: 100,
+                minValue: 100,
+                maxValue: 1000
+            ),
+            OptionDefaults.SpinOption(
+                name: "NalimovCache",
+                defaultValue: 100,
+                minValue: 1,
+                maxValue: 1024
+            ),
+            OptionDefaults.SpinOption(
+                name: "MultiPV",
+                defaultValue: 1,
+                minValue: 1,
+                maxValue: 100
+            ),
+            OptionDefaults.SpinOption(
+                name: "UCIElo",
+                defaultValue: 1500,
+                minValue: 1,
+                maxValue: 3000
+            ),
+            OptionDefaults.ComboOption(
+                name: "Aggressiveness",
+                defaultValue: "Neutral",
+                possibleValues: [
+                    "Conservative",
+                    "Neutral",
+                    "Aggresive"
+                ]
+            ),
+            OptionDefaults.StringOption(
+                name: "UCIOpponent",
+                defaultValue: "None"
+            )
+        ]
+    }
+    
+    func getAllOptions() -> [any Option] {
+        return options
     }
 }
 
-struct AllOptionDefaultSettings {
+struct OptionDefaults {
     
-    //
-    // Check options
-    //
-    fileprivate struct Ponder: Option {
+    struct CheckOption: CheckOptionProtocol, Option {
         
-        
-        struct Defaults: CheckOptionProtocol, OptionDefaultValueProtocol {
-            let defaultValue = true
-        }
-        
-        // Protocol required values
         typealias ValueType = Bool
         
-        let type = OptionType.check(ValueType.self)
-        let name = "Ponder"
-        let defaults = Defaults()
+        let type: OptionType = .check
         
-        var value: ValueType? = nil
+        let name: String
+        let defaultValue: Bool
+        var value: Bool?
         
-        internal func isValid(_ newValue: ValueType) -> Bool {
+        // CheckOptionProtocol
+        //
+        
+        func isValid(_ newValue: Bool) -> Bool {
             return true
         }
         
-        mutating func setValue(_ newValue: ValueType?) -> Bool {
+        mutating func setValue(_ newValue: Bool?) -> Bool {
             if let newValue = newValue {
                 if isValid(newValue) {
                     value = newValue
@@ -62,209 +113,32 @@ struct AllOptionDefaultSettings {
                 }
                 return false
             } else {
-                value = defaults.defaultValue
+                value = defaultValue
                 return true
             }
         }
-        //
     }
-    
-    fileprivate struct OwnBook: Option {
+
+    struct SpinOption: SpinOptionProtocol, Option {
         
-        struct Defaults: CheckOptionProtocol, OptionDefaultValueProtocol {
-            let defaultValue = false
-        }
-        
-        // Protocol required values
-        typealias ValueType = Bool
-        
-        let type = OptionType.check(ValueType.self)
-        let name = "OwnBook"
-        let defaults = Defaults()
-        
-        var value: ValueType? = nil
-        
-        internal func isValid(_ newValue: ValueType) -> Bool {
-            return true
-        }
-        
-        mutating func setValue(_ newValue: ValueType?) -> Bool {
-            if let newValue = newValue {
-                if isValid(newValue) {
-                    value = newValue
-                    return true
-                }
-                return false
-            } else {
-                value = defaults.defaultValue
-                return true
-            }
-        }
-        //
-    }
-    
-    fileprivate struct UCIShowCurrLine: Option {
-        
-        struct Defaults: CheckOptionProtocol, OptionDefaultValueProtocol {
-            let defaultValue = false
-        }
-        
-        // Protocol required values
-        typealias ValueType = Bool
-        
-        let type = OptionType.check(ValueType.self)
-        let name = "UCIShowCurrLine"
-        let defaults = Defaults()
-        
-        var value: ValueType? = nil
-        
-        internal func isValid(_ newValue: ValueType) -> Bool {
-            return true
-        }
-        
-        mutating func setValue(_ newValue: ValueType?) -> Bool {
-            if let newValue = newValue {
-                if isValid(newValue) {
-                    value = newValue
-                    return true
-                }
-                return false
-            } else {
-                value = defaults.defaultValue
-                return true
-            }
-        }
-        //
-    }
-    
-    fileprivate struct UCIShowRefutations: Option {
-        
-        struct Defaults: CheckOptionProtocol, OptionDefaultValueProtocol {
-            let defaultValue = false
-        }
-        
-        // Protocol required values
-        typealias ValueType = Bool
-        
-        let type = OptionType.check(ValueType.self)
-        let name = "UCIShowRefutations"
-        let defaults = Defaults()
-        
-        var value: ValueType? = nil
-        
-        internal func isValid(_ newValue: ValueType) -> Bool {
-            return true
-        }
-        
-        mutating func setValue(_ newValue: ValueType?) -> Bool {
-            if let newValue = newValue {
-                if isValid(newValue) {
-                    value = newValue
-                    return true
-                }
-                return false
-            } else {
-                value = defaults.defaultValue
-                return true
-            }
-        }
-        //
-    }
-    
-    fileprivate struct UCILimitStrength: Option {
-        
-        struct Defaults: CheckOptionProtocol, OptionDefaultValueProtocol {
-            let defaultValue = false
-        }
-        
-        // Protocol required values
-        typealias ValueType = Bool
-        
-        let type = OptionType.check(ValueType.self)
-        let name = "UCILimitStrength"
-        let defaults = Defaults()
-        
-        var value: ValueType? = nil
-        
-        internal func isValid(_ newValue: ValueType) -> Bool {
-            return true
-        }
-        
-        mutating func setValue(_ newValue: ValueType?) -> Bool {
-            if let newValue = newValue {
-                if isValid(newValue) {
-                    value = newValue
-                    return true
-                }
-                return false
-            } else {
-                value = defaults.defaultValue
-                return true
-            }
-        }
-        //
-    }
-    
-    fileprivate struct UCIAnalyzeMode: Option {
-        
-        struct Defaults: CheckOptionProtocol, OptionDefaultValueProtocol {
-            let defaultValue = false
-        }
-        
-        // Protocol required values
-        typealias ValueType = Bool
-        
-        let type = OptionType.check(ValueType.self)
-        let name = "UCIAnalyzeMode"
-        let defaults = Defaults()
-        
-        var value: ValueType? = nil
-        
-        internal func isValid(_ newValue: ValueType) -> Bool {
-            return true
-        }
-        
-        mutating func setValue(_ newValue: ValueType?) -> Bool {
-            if let newValue = newValue {
-                if isValid(newValue) {
-                    value = newValue
-                    return true
-                }
-                return false
-            } else {
-                value = defaults.defaultValue
-                return true
-            }
-        }
-        //
-    }
-    
-    //
-    // Spin options
-    //
-    fileprivate struct Hash: Option {
-        
-        // Values specific to the option type are contained here
-        struct Defaults: SpinOptionProtocol, OptionDefaultValueProtocol {
-            let minValue = 100
-            let maxValue = 1000
-            let defaultValue = 100
-        }
-        
-        // Protocol required values
         typealias ValueType = Int
         
-        let type = OptionType.spin(ValueType.self)
-        let name = "Hash"
-        let defaults = Defaults()
+        let type: OptionType = .spin
         
-        var value: ValueType? = nil
+        let name: String
+        let defaultValue: Int
+        var value: Int?
         
-        internal func isValid(_ newValue: ValueType) -> Bool {
-            return newValue <= defaults.maxValue && newValue >= defaults.maxValue
+        // SpinOptionProtocol
+        let minValue: Int
+        let maxValue: Int
+        //
+        
+        func isValid(_ newValue: Int) -> Bool {
+            return newValue >= minValue && newValue <= maxValue
         }
         
-        mutating func setValue(_ newValue: ValueType?) -> Bool {
+        mutating func setValue(_ newValue: Int?) -> Bool {
             if let newValue = newValue {
                 if isValid(newValue) {
                     value = newValue
@@ -272,153 +146,31 @@ struct AllOptionDefaultSettings {
                 }
                 return false
             } else {
-                value = defaults.defaultValue
+                value = defaultValue
                 return true
             }
         }
-        //
     }
-    
-    fileprivate struct NalimovCache: Option {
+
+    struct ComboOption: ComboOptionProtocol, Option {
         
-        // Values specific to the option type are contained here
-        struct Defaults: SpinOptionProtocol, OptionDefaultValueProtocol {
-            let minValue = 1
-            let maxValue = 1024
-            let defaultValue = 100
-        }
-        
-        // Protocol required values
-        typealias ValueType = Int
-        
-        let type = OptionType.spin(ValueType.self)
-        let name = "NalimovCache"
-        let defaults = Defaults()
-        
-        var value: ValueType? = nil
-        
-        internal func isValid(_ newValue: ValueType) -> Bool {
-            return newValue <= defaults.maxValue && newValue >= defaults.maxValue
-        }
-        
-        mutating func setValue(_ newValue: ValueType?) -> Bool {
-            if let newValue = newValue {
-                if isValid(newValue) {
-                    value = newValue
-                    return true
-                }
-                return false
-            } else {
-                value = defaults.defaultValue
-                return true
-            }
-        }
-        //
-    }
-    
-    fileprivate struct MultiPV: Option {
-        
-        // Values specific to the option type are contained here
-        struct Defaults: SpinOptionProtocol, OptionDefaultValueProtocol {
-            let minValue = 1
-            let maxValue = 100
-            let defaultValue = 1
-        }
-        
-        // Protocol required values
-        typealias ValueType = Int
-        
-        let type = OptionType.spin(ValueType.self)
-        let name = "MultiPV"
-        let defaults = Defaults()
-        
-        var value: ValueType? = nil
-        
-        internal func isValid(_ newValue: ValueType) -> Bool {
-            return newValue <= defaults.maxValue && newValue >= defaults.maxValue
-        }
-        
-        mutating func setValue(_ newValue: ValueType?) -> Bool {
-            if let newValue = newValue {
-                if isValid(newValue) {
-                    value = newValue
-                    return true
-                }
-                return false
-            } else {
-                value = defaults.defaultValue
-                return true
-            }
-        }
-        //
-    }
-    
-    fileprivate struct UCIElo: Option {
-        
-        // Values specific to the option type are contained here
-        struct Defaults: SpinOptionProtocol, OptionDefaultValueProtocol {
-            let minValue = 1
-            let maxValue = 3000
-            let defaultValue = 1500
-        }
-        
-        // Protocol required values
-        typealias ValueType = Int
-        
-        let type = OptionType.spin(ValueType.self)
-        let name = "MultiPV"
-        let defaults = Defaults()
-        
-        var value: ValueType? = nil
-        
-        internal func isValid(_ newValue: ValueType) -> Bool {
-            return newValue <= defaults.maxValue && newValue >= defaults.maxValue
-        }
-        
-        mutating func setValue(_ newValue: ValueType?) -> Bool {
-            if let newValue = newValue {
-                if isValid(newValue) {
-                    value = newValue
-                    return true
-                }
-                return false
-            } else {
-                value = defaults.defaultValue
-                return true
-            }
-        }
-        //
-    }
-    
-    //
-    // Combo options
-    //
-    fileprivate struct Aggressiveness: Option {
-        
-        // Values specific to the option type are contained here
-        struct Defaults: ComboOptionProtocol, OptionDefaultValueProtocol {
-            let possibleValues: [String] = [
-                "Conservative",
-                "Neutral",
-                "Aggresive"
-            ]
-            let defaultValue = "Neutral"
-        }
-        
-        // Protocol required values
         typealias ValueType = String
         
-        let type = OptionType.combo(ValueType.self)
-        let name = "Aggressiveness"
-        let defaults = Defaults()
+        let type: OptionType = .combo
         
-        var value: ValueType? = nil
+        let name: String
+        let defaultValue: String
+        var value: String?
         
-        internal func isValid(_ newValue: ValueType) -> Bool {
-            return defaults.possibleValues.contains(where: { $0.lowercased() == newValue.lowercased() })
+        // ComboOptionProtocol
+        let possibleValues: [String]
+        //
+        
+        func isValid(_ newValue: String) -> Bool {
+            return possibleValues.contains(newValue)
         }
         
-        mutating func setValue(_ newValue: ValueType?) -> Bool {
+        mutating func setValue(_ newValue: String?) -> Bool {
             if let newValue = newValue {
                 if isValid(newValue) {
                     value = newValue
@@ -426,44 +178,63 @@ struct AllOptionDefaultSettings {
                 }
                 return false
             } else {
-                value = defaults.defaultValue
+                value = defaultValue
                 return true
             }
         }
-        //
     }
-    
-    //
-    // Button options
-    //
-    
-    
-    //
-    // String options
-    //
-    fileprivate struct UCIOpponent: Option {
+
+    struct ButtonOption: ButtonOptionProtocol, Option {
         
-        // Values specific to the option type are contained here
-        struct Defaults: ComboOptionProtocol, OptionDefaultValueProtocol {
-            let possibleValues: [String] = [
-            ]
-            let defaultValue = "None"
+        typealias ValueType = Void
+        
+        let type: OptionType = .button
+        
+        let name: String
+        let defaultValue: Void
+        var value: Void?
+        
+        // ButtonOptionProtocol
+        //
+        
+        func isValid(_ newValue: Void) -> Bool {
+            return true
         }
         
-        // Protocol required values
+        //fix
+        mutating func setValue(_ newValue: Void?) -> Bool {
+            if let newValue = newValue {
+                if isValid(newValue) {
+                    value = newValue
+                    return true
+                }
+                return false
+            } else {
+                value = defaultValue
+                return true
+            }
+        }
+    }
+
+    struct StringOption: StringOptionProtocol, Option {
+        
         typealias ValueType = String
         
-        let type = OptionType.string(ValueType.self)
-        let name = "UCIOpponent"
-        let defaults = Defaults()
+        let type: OptionType = .string
         
-        var value: ValueType? = nil
+        let name: String
+        let defaultValue: String
+        var value: String?
         
-        internal func isValid(_ newValue: ValueType) -> Bool {
-            return defaults.possibleValues.contains(where: { $0.lowercased() == newValue.lowercased() })
+        // StringOptionProtocol
+        //
+        
+        func isValid(_ newValue: String) -> Bool {
+            return true
         }
         
-        mutating func setValue(_ newValue: ValueType?) -> Bool {
+        //fix
+        mutating func setValue(_ newValue: String?) -> Bool {
             if let newValue = newValue {
                 if isValid(newValue) {
                     value = newValue
@@ -471,10 +242,9 @@ struct AllOptionDefaultSettings {
                 }
                 return false
             } else {
-                value = defaults.defaultValue
+                value = defaultValue
                 return true
             }
         }
-        //
     }
 }
