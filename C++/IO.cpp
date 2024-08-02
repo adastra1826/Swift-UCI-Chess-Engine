@@ -14,12 +14,13 @@ extern "C" {
 // Reads input using std::getline, ensures null-termination
 void get_input(char* buffer, int bufferSize) {
     
+    if (bufferSize <= 0) {
+        return;
+    }
+    
     std::string c_input;
     
-    while (true) {
-        std::getline(std::cin, c_input);
-        break;
-    }
+    std::getline(std::cin, c_input);
     
     strncpy(buffer, c_input.c_str(), bufferSize - 1);
     buffer[bufferSize - 1] = '\0';
