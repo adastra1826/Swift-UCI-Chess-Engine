@@ -10,27 +10,27 @@ import Foundation
 // Buffer allocator for passing text from C++ to Swift
 // C++ writes output to the buffer provided by Swift
 // Swift casts the resulting text to a String
-class C__stdin_InputWrapper {
+class CppstdinInputWrapper {
     
-    private var bufferSize: Int
-    private var buffer: UnsafeMutablePointer<CChar>
+    private var _bufferSize: Int
+    private var _buffer: UnsafeMutablePointer<CChar>
 
     init(_ bufferSize: Int) {
-        self.bufferSize = bufferSize
-        self.buffer = UnsafeMutablePointer<CChar>.allocate(capacity: bufferSize)
+        self._bufferSize = bufferSize
+        self._buffer = UnsafeMutablePointer<CChar>.allocate(capacity: bufferSize)
     }
 
     deinit {
-        self.buffer.deallocate()
+        self._buffer.deallocate()
     }
 
     func getString() -> String {
         
         // Call C++ input listening function
-        get_input(buffer, Int32(bufferSize))
+        get_input(_buffer, Int32(_bufferSize))
         
         // Copy input result from allocated memory into a String
-        let result = String(cString: buffer)
+        let result = String(cString: _buffer)
         
         return result
     }
@@ -38,11 +38,11 @@ class C__stdin_InputWrapper {
 
 class SwiftInputWrapper {
     
-    let cInputWrapper: C__stdin_InputWrapper
+    let cInputWrapper: CppstdinInputWrapper
     let inputParser: InputParser
     
     init() {
-        cInputWrapper = C__stdin_InputWrapper(50)
+        cInputWrapper = CppstdinInputWrapper(50)
         inputParser = InputParser()
     }
     
@@ -56,7 +56,7 @@ class SwiftInputWrapper {
             
             inputParser.parse(rawInput)
             
-            if sharedData.safeMirrorMasterQuit() {
+            if sharedData.masterQuit() {
                 log.info("End SwiftInputWrapper: master quit")
                 break
             }
