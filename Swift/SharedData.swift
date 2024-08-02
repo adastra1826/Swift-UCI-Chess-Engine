@@ -9,13 +9,22 @@ import Foundation
 
 class SharedData {
    
-    private let quitSwitchQueue: DispatchQueue
-    private let UUIDQueue: DispatchQueue
+    let quitSwitchSemaphore: DispatchSemaphore
     
-    private var masterQuitSwitch: Bool
+    private let _quitSwitchQueue: DispatchQueue
+    private let _UUIDQueue: DispatchQueue
+    
+    private var _masterQuitSwitch: Bool
     
     var activeThreadUUIDs: [UUID] = []
     var terminatedThreadUUIDs: [UUID] = []
+    
+    init() {
+        quitSwitchSemaphore = DispatchSemaphore(value: 0)
+        _quitSwitchQueue = DispatchQueue(label: "com.PeerlessApps.Chess.quitSwitchQueue")
+        _UUIDQueue = DispatchQueue(label: "com.PeerlessApps.Chess.UUIDQueue")
+        _masterQuitSwitch = false
+    }
     
     struct Info {
         static let author = "Nicholas Doherty"
@@ -28,34 +37,29 @@ class SharedData {
         case fatal(message: String)
     }
     
-    init() {
-        quitSwitchQueue = DispatchQueue(label: "com.PeerlessApps.Chess.quitSwitchQueue")
-        UUIDQueue = DispatchQueue(label: "com.PeerlessApps.Chess.UUIDQueue")
-        masterQuitSwitch = false
-    }
-    
     public func masterQuit() -> Bool {
-        quitSwitchQueue.sync {
-            return sharedData.masterQuitSwitch
+        _quitSwitchQueue.sync {
+            return _masterQuitSwitch
         }
     }
     
     public func safeKillAll() {
-        quitSwitchQueue.sync {
-            masterQuitSwitch = true
+        _quitSwitchQueue.sync {
+            _masterQuitSwitch = true
         }
+        quitSwitchSemaphore.signal()
     }
     
     public func generateNewUUID() -> UUID {
         let newUUID = UUID()
-        UUIDQueue.sync {
+        _UUIDQueue.sync {
             activeThreadUUIDs.append(newUUID)
         }
         return newUUID
     }
     
     public func terminateUUID(_ oldUUID: UUID) {
-        UUIDQueue.sync {
+        _UUIDQueue.sync {
             activeThreadUUIDs.removeAll(where: { $0 == oldUUID} )
             terminatedThreadUUIDs.append(oldUUID)
         }
