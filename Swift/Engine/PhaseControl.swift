@@ -6,3 +6,20 @@
 //
 
 import Foundation
+
+// Manage the phase of engine operation, as not all commands can be accepted at all times
+class PhaseControl {
+    
+    init() {
+        
+    }
+}
+
+enum PhaseEnum {
+    case startup
+    case idle
+    case search
+    case pause
+    case stop
+    case error
+}
