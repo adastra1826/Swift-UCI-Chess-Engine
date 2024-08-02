@@ -8,33 +8,26 @@
 import Foundation
 
 enum OptionType {
-    case check(Bool.Type)
-    case spin(Int.Type)
-    case combo(String.Type)
-    case button(Void.Type)
-    case string(String.Type)
+    case check
+    case spin
+    case combo
+    case button
+    case string
     case unknown
 }
 
 protocol Option {
     
     associatedtype ValueType
-    associatedtype P: OptionDefaultValueProtocol
     
     var type: OptionType { get }
     var name: String { get }
-    var defaults: P { get }
-    
-    var value: ValueType? { get }
+    var defaultValue: ValueType { get }
+    var value: ValueType? { get set }
     
     func isValid(_ newValue: ValueType) -> Bool
     
     mutating func setValue(_ newValue: ValueType?) -> Bool
-}
-
-protocol OptionDefaultValueProtocol {
-    associatedtype ValueType
-    var defaultValue: ValueType { get }
 }
 
 protocol CheckOptionProtocol {
@@ -42,12 +35,14 @@ protocol CheckOptionProtocol {
 }
 
 protocol SpinOptionProtocol {
-    var minValue: Int { get }
-    var maxValue: Int { get }
+    associatedtype ValueType: Comparable
+    var minValue: ValueType { get }
+    var maxValue: ValueType { get }
 }
 
 protocol ComboOptionProtocol {
-    var possibleValues: [String] { get }
+    associatedtype ValueType: Equatable
+    var possibleValues: [ValueType] { get }
 }
 
 protocol ButtonOptionProtocol {
