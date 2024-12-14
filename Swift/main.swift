@@ -14,9 +14,8 @@ log.setup(level: .info, showThreadName: true, showLevel: true, showFileNames: tr
 
 log.logAppDetails()
 
-private let settings = Parameters()
 private let sharedData = SharedData()
 
-let master = EngineMaster(settings, sharedData)
+let master = EngineMaster(sharedData)
 
 master.start()

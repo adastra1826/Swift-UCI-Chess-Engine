@@ -13,7 +13,6 @@
 		0C091B102B4981E8005E3F3B /* IO.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0C091B0E2B4981E8005E3F3B /* IO.cpp */; };
 		0C091B322B4BC006005E3F3B /* InputWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C091B312B4BC006005E3F3B /* InputWrapper.swift */; };
 		0C091B362B4BCCA7005E3F3B /* Engine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C091B352B4BCCA7005E3F3B /* Engine.swift */; };
-		0C091B3D2B4BD2DE005E3F3B /* Parameters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C091B3C2B4BD2DE005E3F3B /* Parameters.swift */; };
 		0C75B9772B4F788800C0B90E /* Protocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C75B9762B4F788800C0B90E /* Protocol.swift */; };
 		0C75B9792B4F849D00C0B90E /* EngineMaster.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C75B9782B4F849D00C0B90E /* EngineMaster.swift */; };
 		0C75B97B2B4FA78000C0B90E /* SharedData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C75B97A2B4FA78000C0B90E /* SharedData.swift */; };
@@ -59,7 +58,6 @@
 		0C091B302B4BBC95005E3F3B /* UCI_Protocol.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = UCI_Protocol.txt; sourceTree = "<group>"; };
 		0C091B312B4BC006005E3F3B /* InputWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputWrapper.swift; sourceTree = "<group>"; };
 		0C091B352B4BCCA7005E3F3B /* Engine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Engine.swift; sourceTree = "<group>"; };
-		0C091B3C2B4BD2DE005E3F3B /* Parameters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Parameters.swift; sourceTree = "<group>"; };
 		0C75B9762B4F788800C0B90E /* Protocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Protocol.swift; sourceTree = "<group>"; };
 		0C75B9782B4F849D00C0B90E /* EngineMaster.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EngineMaster.swift; sourceTree = "<group>"; };
 		0C75B97A2B4FA78000C0B90E /* SharedData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedData.swift; sourceTree = "<group>"; };
@@ -116,7 +114,6 @@
 			isa = PBXGroup;
 			children = (
 				0C091B062B4981C7005E3F3B /* main.swift */,
-				0C091B3C2B4BD2DE005E3F3B /* Parameters.swift */,
 				0C75B97A2B4FA78000C0B90E /* SharedData.swift */,
 				0C75B9782B4F849D00C0B90E /* EngineMaster.swift */,
 				0C091B382B4BCCBE005E3F3B /* IO Handing */,
@@ -282,7 +279,6 @@
 				0C7A57102B5A3EC300011987 /* Move Validation.swift in Sources */,
 				0C0883892C5D7D0F002791E7 /* CommandDispatch.swift in Sources */,
 				0C7A570E2B5A128100011987 /* Magic Variables.swift in Sources */,
-				0C091B3D2B4BD2DE005E3F3B /* Parameters.swift in Sources */,
 				0C75B9772B4F788800C0B90E /* Protocol.swift in Sources */,
 				0C091B362B4BCCA7005E3F3B /* Engine.swift in Sources */,
 				0CA3DBDB2BBF27EC0037B33A /* SearchThread.swift in Sources */,

@@ -10,7 +10,6 @@ import Foundation
 class EngineMaster {
     
     // Dependency injections
-    private let settings: Parameters
     private let sharedData: SharedData
     
     // Privately initialized
@@ -20,14 +19,13 @@ class EngineMaster {
     
     private let masterThreadGroup: DispatchGroup
     
-    init(_ settings: Parameters, _ sharedData: SharedData) {
+    init(_ sharedData: SharedData) {
         
-        self.settings = settings
         self.sharedData = sharedData
         
         self.inputWrapper = SwiftInputWrapper()
         self.outputWrapper = SwiftOutputWrapper()
-        self.engine = Engine(settings.engine, sharedData, outputWrapper)
+        self.engine = Engine(sharedData, outputWrapper)
         
         masterThreadGroup = DispatchGroup()
     }

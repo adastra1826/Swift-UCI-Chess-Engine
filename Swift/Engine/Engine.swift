@@ -9,8 +9,10 @@ import Foundation
 
 class Engine {
     
+    // Temporary variable to be moved later to a method where it can be changed by the user
+    private let maxThreads = 3
+    
     // Dependency injections
-    private let engineParameters: Parameters.Engine
     private let sharedData: SharedData
     
     // Privately initialized variables
@@ -28,17 +30,16 @@ class Engine {
     // Stop calculating ASAP
     private let stopCondition: NSCondition
     
-    init(_ engineParameters: Parameters.Engine, _ sharedData: SharedData, _ outputWrapper: SwiftOutputWrapper) {
+    init(_ sharedData: SharedData, _ outputWrapper: SwiftOutputWrapper) {
         
-        self.engineParameters = engineParameters
         self.sharedData = sharedData
         self.outputWrapper = outputWrapper
         
         self.engineOptions = EngineOptions()
         self.phaseControl = PhaseControl()
-        self.commandDispatch = CommandDispatch()
+        self.commandDispatch = CommandDispatch(outputWrapper)
         
-        searchThreadPermits = DispatchSemaphore(value: engineParameters.getMaxThreads())
+        searchThreadPermits = DispatchSemaphore(value: maxThreads)
         
         updateThreadOptionsQueue = DispatchQueue(label: "com.PeerlessApps.chess.updateThreadOptionsQueue")
         
@@ -51,6 +52,10 @@ class Engine {
         
         log.info("Start engine")
         
+    }
+    
+    func command(_ command: TopLevelCommand, _ arguments: [String]) {
+        commandDispatch.command(command, arguments)
     }
     
     
