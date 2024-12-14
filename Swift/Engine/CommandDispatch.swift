@@ -9,6 +9,8 @@ import Foundation
 
 class CommandDispatch {
     
+    private let outputWrapper: SwiftOutputWrapper
+    
     private lazy var allCommandsDispatchMap: [TopLevelCommand: ([String]) -> Void] = [
         .uci: uciCommand,
         .isready: isreadyCommand,
@@ -23,8 +25,8 @@ class CommandDispatch {
         .go: goCommand
     ]
     
-    init() {
-        
+    init(_ outputWrapper: SwiftOutputWrapper) {
+        self.outputWrapper = outputWrapper
     }
     
     func command(_ command: TopLevelCommand, _ arguments: [String]) {
